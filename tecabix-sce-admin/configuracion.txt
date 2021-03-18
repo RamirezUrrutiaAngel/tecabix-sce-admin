@@ -1,0 +1,6 @@
+#TECABIX
+#Fri Aug 28 18:49:58 CDT 2020
+hashEquipo=f9937120-1f35-480c-b9be-4b9dea9ae785
+http=http://
+ip=localhost
+puerto=8080
