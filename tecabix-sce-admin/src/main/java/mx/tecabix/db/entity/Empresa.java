@@ -34,7 +34,7 @@ import javax.persistence.OneToOne;
  * @author Ramirez Urrutia Angel Abinadi
  */
 @Entity
-public class Escuela implements Serializable {
+public class Empresa implements Serializable {
 
     private static final long serialVersionUID = 4047413230691680424L;
     @Id

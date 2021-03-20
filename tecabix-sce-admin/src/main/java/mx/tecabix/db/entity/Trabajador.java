@@ -58,8 +58,8 @@ public class Trabajador implements Serializable {
     private Trabajador jefe;
     @Column(name = "url_imagen")
     private String urlImagen;
-    @Column(name = "id_escuela")
-    private Long idEscuela;
+    @Column(name = "id_empresa")
+    private Long idEmpresa;
     @Column(name = "id_usuario_modificado")
     @JsonProperty(access = Access.WRITE_ONLY)
     private Long idUsuarioModificado;
@@ -128,12 +128,12 @@ public class Trabajador implements Serializable {
         this.urlImagen = urlImagen;
     }
 
-    public Long getIdEscuela() {
-        return idEscuela;
+    public Long getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setIdEscuela(Long idEscuela) {
-        this.idEscuela = idEscuela;
+    public void setIdEmpresa(Long idEscuela) {
+        this.idEmpresa = idEmpresa;
     }
 
     public Long getIdUsuarioModificado() {

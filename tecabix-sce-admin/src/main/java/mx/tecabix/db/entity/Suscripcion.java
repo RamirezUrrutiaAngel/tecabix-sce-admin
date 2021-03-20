@@ -44,7 +44,7 @@ public class Suscripcion implements Serializable {
     private Plan plan;
     @ManyToOne
     @JoinColumn(name = "id_escuela")
-    private Escuela escuela;
+    private Empresa escuela;
     @Column(name = "vencimiento")
     private LocalDate vencimiento;
     @Column(name = "id_usuario_modificado")
@@ -73,11 +73,11 @@ public class Suscripcion implements Serializable {
         this.plan = plan;
     }
 
-    public Escuela getEscuela() {
+    public Empresa getEscuela() {
         return escuela;
     }
 
-    public void setEscuela(Escuela escuela) {
+    public void setEscuela(Empresa escuela) {
         this.escuela = escuela;
     }
 

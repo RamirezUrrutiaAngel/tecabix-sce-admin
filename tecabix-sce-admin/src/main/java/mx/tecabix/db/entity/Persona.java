@@ -49,8 +49,8 @@ public class Persona implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_tipo")
     private Catalogo tipo;
-    @Column(name = "id_escuela")
-    private Long idEscuela;
+    @Column(name = "id_empresa")
+    private Long idEmpresa;
     @Column(name = "id_usuario_modificado")
     private Long idUsuarioModificado;
     @Column(name = "fecha_modificado")
@@ -83,12 +83,12 @@ public class Persona implements Serializable {
         this.tipo = tipo;
     }
 
-    public Long getIdEscuela() {
-        return idEscuela;
+    public Long getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setIdEscuela(Long idEscuela) {
-        this.idEscuela = idEscuela;
+    public void setIdEmpresa(Long idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public Long getIdUsuarioModificado() {

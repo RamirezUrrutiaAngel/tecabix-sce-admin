@@ -40,8 +40,8 @@ public class Configuracion implements Serializable {
     private static final long serialVersionUID = -3454681497916100291L;
     @Id
     private Long id;
-    @Column(name = "id_escuela")
-    private Long idEscuela;
+    @Column(name = "id_empresa")
+    private Long idEmpresa;
     @ManyToOne
     @JoinColumn(name = "id_tipo")
     private Catalogo tipo;
@@ -65,12 +65,12 @@ public class Configuracion implements Serializable {
         this.id = id;
     }
 
-    public Long getIdEscuela() {
-        return idEscuela;
+    public Long getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setIdEscuela(Long idEscuela) {
-        this.idEscuela = idEscuela;
+    public void setIdEmpresa(Long idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public Catalogo getTipo() {
