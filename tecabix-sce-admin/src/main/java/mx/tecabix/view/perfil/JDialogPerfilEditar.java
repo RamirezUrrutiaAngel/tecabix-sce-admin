@@ -100,6 +100,8 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
             }
             counstrurTablas();
         } catch (Exception ex) {
+            dispose();
+            ErrorLog errorLog = new ErrorLog(THIS, ex);
             Logger.getLogger(JDialogPerfilEditar.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -131,6 +133,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
             }
             
         } catch (Exception e) {
+            dispose();
             ErrorLog error = new ErrorLog(this, e);
         }
     }
@@ -178,7 +181,8 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
             });
             jTableA.getTableHeader().setReorderingAllowed(false) ;
         } catch (Exception e) {
-             ErrorLog error = new ErrorLog(this, e);
+            dispose();
+            ErrorLog error = new ErrorLog(this, e);
         }
     }
 
@@ -208,6 +212,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
             }
             
         } catch (Exception e) {
+            dispose();
             ErrorLog error = new ErrorLog(this, e);
         }
     }
@@ -256,7 +261,8 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
             });
             jTableB.getTableHeader().setReorderingAllowed(false) ;
         } catch (Exception e) {
-             ErrorLog error = new ErrorLog(this, e);
+            dispose();
+            ErrorLog error = new ErrorLog(this, e);
         }
     }
     private void counstrurTablas(){

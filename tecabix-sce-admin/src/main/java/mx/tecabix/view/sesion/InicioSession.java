@@ -111,26 +111,24 @@ public class InicioSession extends javax.swing.JDialog {
                             + "<li>El servidor está fuera de servicio </li>"
                             + "</ul></html>";
                     if (ex.getMessage().equalsIgnoreCase("401 Unauthorized")) {
-                        JOptionPane.showMessageDialog(this, msj_401, "Acceso no Authorizado", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(THIS, msj_401, "Acceso no Authorizado", JOptionPane.WARNING_MESSAGE);
                     } else if (ex.getMessage().equalsIgnoreCase("404 Not Found")) {
-                        JOptionPane.showMessageDialog(this, msj_404, "Acceso no Authorizado", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(THIS, msj_404, "Acceso no Authorizado", JOptionPane.ERROR_MESSAGE);
                     } else if (ex.getMessage().equalsIgnoreCase("406 Not Acceptable")) {
-                        JOptionPane.showMessageDialog(this, msj_406, "Acceso no Authorizado", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(THIS, msj_406, "Acceso no Authorizado", JOptionPane.ERROR_MESSAGE);
                     } else if (ex.getMessage().equalsIgnoreCase("409 Conflict")) {
-                        JOptionPane.showMessageDialog(this, msj_409, "Acceso no Authorizado", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(THIS, msj_409, "Acceso no Authorizado", JOptionPane.ERROR_MESSAGE);
                     } else if (ex.getMessage().equalsIgnoreCase("423 Locked")) {
-                        JOptionPane.showMessageDialog(this, msj_423, "Sistema suspendido", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(THIS, msj_423, "Sistema suspendido", JOptionPane.ERROR_MESSAGE);
                     } else if (ex.getMessage().contains("Connection refused")) {
-                        JOptionPane.showMessageDialog(null, msj_refused, "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(THIS, msj_refused, "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        ErrorLog errorLog = new ErrorLog(this, ex);
+                        ErrorLog errorLog = new ErrorLog(THIS, ex);
                     }
                 }
                 this.getjProgressBar().setValue(100);
             }
         };
-      
-
     }
 
     /**

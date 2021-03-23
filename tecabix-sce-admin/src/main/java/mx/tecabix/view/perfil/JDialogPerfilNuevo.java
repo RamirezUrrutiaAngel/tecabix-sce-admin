@@ -85,10 +85,11 @@ public class JDialogPerfilNuevo extends javax.swing.JDialog {
                     }
                 }
             }
-            
             counstrurTablas();
         } catch (Exception ex) {
             Logger.getLogger(JDialogPerfilNuevo.class.getName()).log(Level.SEVERE, null, ex);
+            dispose();
+            ErrorLog error = new ErrorLog(this, ex);
         }
         
     }
@@ -119,6 +120,7 @@ public class JDialogPerfilNuevo extends javax.swing.JDialog {
             }
             
         } catch (Exception e) {
+            dispose();
             ErrorLog error = new ErrorLog(this, e);
         }
     }
@@ -166,7 +168,8 @@ public class JDialogPerfilNuevo extends javax.swing.JDialog {
             });
             jTableA.getTableHeader().setReorderingAllowed(false) ;
         } catch (Exception e) {
-             ErrorLog error = new ErrorLog(this, e);
+            dispose();
+            ErrorLog error = new ErrorLog(THIS, e);
         }
     }
 

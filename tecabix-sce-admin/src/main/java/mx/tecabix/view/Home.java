@@ -26,6 +26,7 @@ import javax.swing.JTabbedPane;
 import mx.tecabix.ConfiguracionConexion;
 import mx.tecabix.service.Auth;
 import mx.tecabix.service.controller.SesionConreoller;
+import mx.tecabix.view.departamento.JPanelDepartamento;
 import mx.tecabix.view.perfil.JPanelPerfil;
 import mx.tecabix.view.sesion.JPanelSesion;
 /**
@@ -38,6 +39,7 @@ public class Home extends javax.swing.JFrame {
     private final JFrame home;
     private JPanelSesion jPanelSesion;
     private JPanelPerfil jPanelPerfil;
+    private JPanelDepartamento jPanelDepartamento;
 
     public Home() {
         initComponents();
@@ -55,6 +57,7 @@ public class Home extends javax.swing.JFrame {
 
     private final String SESION = "SESION";
     private final String PERFIL = "PERFIL";
+    private final String DEPARTAMENTO = "DEPARTAMENTO";
     public void cargarDatos() {
         Proceso proceso = new Proceso(this) {
             @Override
@@ -72,6 +75,11 @@ public class Home extends javax.swing.JFrame {
                 if(auth.isAuthorized(PERFIL)){
                     jPanelPerfil = new JPanelPerfil(home);
                     getjTabbedPane().add(jPanelPerfil, "Perfil");
+                }
+                getjProgressBar().setValue(30);
+                if(auth.isAuthorized(DEPARTAMENTO)){
+                     jPanelDepartamento = new JPanelDepartamento(home);
+                     getjTabbedPane().add(jPanelDepartamento, "Departamento");
                 }
                 getjProgressBar().setValue(100);
             }
@@ -195,12 +203,12 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCerrarSesionActionPerformed
 
     private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
-       
-        
         if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelSesion.class)) {
             jPanelSesion.init();
         } else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelPerfil.class)) {
             jPanelPerfil.init();
+        } else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelDepartamento.class)) {
+            jPanelDepartamento.init();
         }
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
