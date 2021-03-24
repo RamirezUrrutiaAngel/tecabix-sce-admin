@@ -26,6 +26,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Ramirez Urrutia Angel Abinadi
@@ -35,6 +36,9 @@ import javax.persistence.ManyToOne;
 public class Puesto implements Serializable {
 
     private static final long serialVersionUID = -1105824443217371322L;
+
+    public static final short SIZE_NOMBRE = 35;
+    public static final short SIZE_DESCRIPCION = 300;
 
     @Id
     private Long id;
@@ -117,5 +121,35 @@ public class Puesto implements Serializable {
 
     public void setClave(UUID clave) {
         this.clave = clave;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Puesto other = (Puesto) obj;
+        if (clave == null) {
+            if (other.clave != null) {
+                return false;
+            }
+        } else if (!clave.equals(other.clave)) {
+            return false;
+        }
+        return true;
     }
 }

@@ -28,6 +28,7 @@ import mx.tecabix.service.Auth;
 import mx.tecabix.service.controller.SesionConreoller;
 import mx.tecabix.view.departamento.JPanelDepartamento;
 import mx.tecabix.view.perfil.JPanelPerfil;
+import mx.tecabix.view.puesto.JPanelPuesto;
 import mx.tecabix.view.sesion.JPanelSesion;
 /**
  * 
@@ -40,6 +41,7 @@ public class Home extends javax.swing.JFrame {
     private JPanelSesion jPanelSesion;
     private JPanelPerfil jPanelPerfil;
     private JPanelDepartamento jPanelDepartamento;
+    private JPanelPuesto jPanelPuesto;
 
     public Home() {
         initComponents();
@@ -58,6 +60,7 @@ public class Home extends javax.swing.JFrame {
     private final String SESION = "SESION";
     private final String PERFIL = "PERFIL";
     private final String DEPARTAMENTO = "DEPARTAMENTO";
+    private final String PUESTO = "PUESTO";
     public void cargarDatos() {
         Proceso proceso = new Proceso(this) {
             @Override
@@ -69,17 +72,22 @@ public class Home extends javax.swing.JFrame {
                 getjProgressBar().setValue(10);
                 if(auth.isAuthorized(SESION)){
                     jPanelSesion = new JPanelSesion(home);
-                    getjTabbedPane().add(jPanelSesion, "Sesion");
+                    getjTabbedPane().add(jPanelSesion, " Sesion ");
                 }
                 getjProgressBar().setValue(20);
                 if(auth.isAuthorized(PERFIL)){
                     jPanelPerfil = new JPanelPerfil(home);
-                    getjTabbedPane().add(jPanelPerfil, "Perfil");
+                    getjTabbedPane().add(jPanelPerfil, " Perfil ");
                 }
                 getjProgressBar().setValue(30);
                 if(auth.isAuthorized(DEPARTAMENTO)){
                      jPanelDepartamento = new JPanelDepartamento(home);
-                     getjTabbedPane().add(jPanelDepartamento, "Departamento");
+                     getjTabbedPane().add(jPanelDepartamento, " Departamento ");
+                }
+                getjProgressBar().setValue(30);
+                if(auth.isAuthorized(PUESTO)){
+                     jPanelPuesto = new JPanelPuesto(home);
+                     getjTabbedPane().add(jPanelPuesto, " Puesto ");
                 }
                 getjProgressBar().setValue(100);
             }
@@ -108,6 +116,7 @@ public class Home extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setSize(new java.awt.Dimension(1200, 700));
 
+        jTabbedPane.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPaneStateChanged(evt);
@@ -210,6 +219,8 @@ public class Home extends javax.swing.JFrame {
             jPanelPerfil.init();
         } else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelDepartamento.class)) {
             jPanelDepartamento.init();
+        } else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelPuesto.class)) {
+            jPanelPuesto.init();
         }
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
