@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import static javax.swing.SwingConstants.RIGHT;
@@ -330,14 +331,45 @@ public class JPanelDepartamento extends javax.swing.JPanel {
     }
     
     private void ver(){
-
+        int selected = jTable.getSelectedRow();
+        if(selected >= 0 && selected < departamentos.size()){
+            Departamento departamento = departamentos.get(selected);
+            JDialogDepartamentoVer jddv = new JDialogDepartamentoVer(parent, departamento);
+        }else{
+            JOptionPane.showMessageDialog(parent, "No se puede realizar la accion", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
     private void editar(){
-
+        int selected = jTable.getSelectedRow();
+        if(selected >= 0 && selected < departamentos.size()){
+            Departamento departamento = departamentos.get(selected);
+            JDialogDepartamentoEditar jdde = new JDialogDepartamentoEditar(parent, departamento);
+            init();
+        }else{
+            JOptionPane.showMessageDialog(parent, "No se puede realizar la accion", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
     
     private void eliminar(){
-
+        int selected = jTable.getSelectedRow();
+        if(selected >= 0 && selected < departamentos.size()){
+            Departamento departamento = departamentos.get(selected);
+            
+            int op = JOptionPane.showConfirmDialog(parent, "¿Estás seguro de eliminar el departamentos de "+departamento.getNombre()+"?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if(op == JOptionPane.YES_OPTION){
+                try {
+                    DepartamentoController departamentoController = new DepartamentoController();
+                    departamentoController.delete(departamento.getClave());
+                    init();
+                } catch (Exception ex) {
+                    Logger.getLogger(JPanelPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                    ErrorLog err= new ErrorLog(parent, ex);
+                }
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(parent, "No se puede realizar la accion", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -632,7 +664,7 @@ public class JPanelDepartamento extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldSearchActionPerformed
 
     private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
-        JDialogPerfilNuevo perfilNuevo = new JDialogPerfilNuevo(parent);
+        JDialogDepartamentoNuevo jddn = new JDialogDepartamentoNuevo(parent);
         init();
     }//GEN-LAST:event_jButtonNuevoActionPerformed
 
@@ -645,7 +677,7 @@ public class JPanelDepartamento extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
-        JDialogPerfilNuevo perfilNuevo = new JDialogPerfilNuevo(parent);
+        JDialogDepartamentoNuevo d = new JDialogDepartamentoNuevo(parent);
         init();
     }//GEN-LAST:event_jMenuItemNuevoActionPerformed
 

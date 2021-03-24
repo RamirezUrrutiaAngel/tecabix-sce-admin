@@ -18,7 +18,9 @@
 package mx.tecabix.service.controller;
 
 import java.util.HashMap;
+import java.util.UUID;
 import mx.tecabix.db.entity.Departamento;
+import mx.tecabix.db.entity.Perfil;
 import mx.tecabix.service.TecabixService;
 import mx.tecabix.service.page.DepartamentoPage;
 import org.springframework.http.HttpMethod;
@@ -64,5 +66,22 @@ public class DepartamentoController extends TecabixService<Departamento, Departa
         arg.put(ELEMENTS, elements);
         arg.put(PAGE, page);
         return getPeticion(HttpMethod.GET, URL_DEPARTAMENTO, arg);
+    }
+    
+    public Departamento save(Departamento save) throws Exception {
+        TecabixService<Departamento,Departamento> service = new TecabixService<>(Departamento.class);
+        return service.getPeticion(HttpMethod.POST, URL_DEPARTAMENTO, save);
+    }
+    
+    public Departamento update(Departamento update) throws Exception {
+        TecabixService<Departamento,Departamento> service = new TecabixService<>(Departamento.class);
+        return service.getPeticion(HttpMethod.POST, URL_DEPARTAMENTO, update);
+    }
+    
+    public void delete(UUID clave) throws Exception {
+        TecabixService<?,?> service = new TecabixService<>(Perfil.class);
+        HashMap<String,Object> arg = new HashMap<>();
+        arg.put(CLAVE, clave);
+        service.getPeticion(HttpMethod.DELETE, URL_DEPARTAMENTO,arg);
     }
 }
