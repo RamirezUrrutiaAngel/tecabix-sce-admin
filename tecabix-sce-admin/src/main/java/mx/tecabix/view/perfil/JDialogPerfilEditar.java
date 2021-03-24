@@ -51,6 +51,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
     private ModelT defaultTableModelA;
     private ModelT defaultTableModelB;
     private Perfil perfil;
+    private Auth auth = new Auth();
     
     public JDialogPerfilEditar(java.awt.Frame parent, Perfil perfil) {
         super(parent, true);
@@ -299,6 +300,8 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar Perfil");
+        setMinimumSize(new java.awt.Dimension(927, 460));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -312,6 +315,11 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
         });
 
         jTextFieldDescripcion.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jTextFieldDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldDescripcionKeyTyped(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -520,7 +528,10 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyTyped
-        // TODO add your handling code here:
+        String aux = jTextFieldNombre.getText()+evt.getKeyChar();
+        if(auth.isNotValid(Auth.TIPO_NUMERIC_SPACE, Perfil.SIZE_NOMBRE, aux)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_jTextFieldNombreKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -605,6 +616,13 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
         };
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
+
+    private void jTextFieldDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDescripcionKeyTyped
+        String aux = jTextFieldDescripcion.getText()+evt.getKeyChar();
+        if(auth.isNotValid(Auth.TIPO_ALFA_NUMERIC_SPACE_WITH_SPECIAL_SYMBOLS, Perfil.SIZE_DESCRIPCION, aux)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldDescripcionKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -166,6 +166,8 @@ public class JDialogPerfilVer extends javax.swing.JDialog {
         jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ver Perfil");
+        setMinimumSize(new java.awt.Dimension(573, 300));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

@@ -18,8 +18,10 @@
 package mx.tecabix;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import mx.tecabix.view.ErrorLog;
@@ -33,7 +35,8 @@ import mx.tecabix.view.sesion.InicioSession;
  */
 public class Admin {
 
-    static Home home = null;
+    private static Home home = null;
+    private static final String VERCION = "2021.02.23 BETA";
     
     public static void main(String[] args) {
         
@@ -41,6 +44,8 @@ public class Admin {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             home = new Home();
             home.setExtendedState(MAXIMIZED_BOTH);
+            home.setTitle("Tecabix SCE "+VERCION);
+            home.setIconImage(new ImageIcon(home.getClass().getResource("/img/logo/tecabix-simple.png")).getImage());
             home.setLocationRelativeTo(null);
             home.setVisible(true);
             InicioSession inicioSession;
