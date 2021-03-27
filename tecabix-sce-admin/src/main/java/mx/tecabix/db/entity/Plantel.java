@@ -43,11 +43,13 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class Plantel implements Serializable {
 
     private static final long serialVersionUID = -1144141703432606826L;
+    
+    public static final short SIZE_NOMBRE = 200;
+    
     @Id
     private Long id;
     @Column(name = "nombre")
     private String nombre;
-    @JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "id_gerente")
     private Trabajador gerente;

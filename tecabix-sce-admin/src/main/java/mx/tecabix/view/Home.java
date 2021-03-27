@@ -28,6 +28,7 @@ import mx.tecabix.service.Auth;
 import mx.tecabix.service.controller.SesionConreoller;
 import mx.tecabix.view.departamento.JPanelDepartamento;
 import mx.tecabix.view.perfil.JPanelPerfil;
+import mx.tecabix.view.plantel.JPanelPlantel;
 import mx.tecabix.view.puesto.JPanelPuesto;
 import mx.tecabix.view.sesion.JPanelSesion;
 /**
@@ -42,6 +43,7 @@ public class Home extends javax.swing.JFrame {
     private JPanelPerfil jPanelPerfil;
     private JPanelDepartamento jPanelDepartamento;
     private JPanelPuesto jPanelPuesto;
+    private JPanelPlantel jPanelPlantel;
 
     public Home() {
         initComponents();
@@ -61,6 +63,7 @@ public class Home extends javax.swing.JFrame {
     private final String PERFIL = "PERFIL";
     private final String DEPARTAMENTO = "DEPARTAMENTO";
     private final String PUESTO = "PUESTO";
+    private final String PLANTEL = "PLANTEL";
     public void cargarDatos() {
         Proceso proceso = new Proceso(this) {
             @Override
@@ -88,6 +91,11 @@ public class Home extends javax.swing.JFrame {
                 if(auth.isAuthorized(PUESTO)){
                      jPanelPuesto = new JPanelPuesto(home);
                      getjTabbedPane().add(jPanelPuesto, " Puesto ");
+                }
+                getjProgressBar().setValue(40);
+                if(auth.isAuthorized(PLANTEL)){
+                     jPanelPlantel = new JPanelPlantel(home);
+                     getjTabbedPane().add(jPanelPlantel, " Plantel ");
                 }
                 getjProgressBar().setValue(100);
             }
@@ -221,6 +229,8 @@ public class Home extends javax.swing.JFrame {
             jPanelDepartamento.init();
         } else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelPuesto.class)) {
             jPanelPuesto.init();
+        } else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelPlantel.class)) {
+            jPanelPlantel.init();
         }
     }//GEN-LAST:event_jTabbedPaneStateChanged
 

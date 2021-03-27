@@ -34,6 +34,13 @@ public abstract class Proceso extends javax.swing.JDialog{
         init();
     }
     
+    public Proceso(java.awt.Frame parent) {
+        super(parent, true);
+        initComponents();
+        this.setLocationRelativeTo(parent);
+        init();
+    }
+    
     public Proceso(JDialog parent) {
         super(parent, true);
         initComponents();

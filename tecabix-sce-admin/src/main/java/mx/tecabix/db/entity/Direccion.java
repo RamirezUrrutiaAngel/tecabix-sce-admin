@@ -37,6 +37,14 @@ public class Direccion implements Serializable {
 
     private static final long serialVersionUID = 4798658742448338510L;
 
+    public static final short SIZE_CALLE = 40;
+    public static final short SIZE_CODIGO_POSTAL = 6;
+    public static final short SIZE_NUM_INT = 15;
+    public static final short SIZE_NUM_EXT = 10;
+    public static final short SIZE_ASENTAMIENTO = 40;
+    public static final short SIZE_ENTRE_CALLE = 40;
+    public static final short SIZE_REFERENCIA = 250;
+
     @Id
     private Long id;
     @Column(name = "calle")
