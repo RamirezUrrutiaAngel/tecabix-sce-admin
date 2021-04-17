@@ -60,7 +60,6 @@ public class Persona implements Serializable {
     private Catalogo estatus;
     @Column(name = "clave")
     private UUID clave;
-    @JsonProperty(access = Access.WRITE_ONLY)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "persona", cascade = CascadeType.REMOVE)
     private UsuarioPersona usuarioPersona;
     @JsonProperty(access = Access.WRITE_ONLY)

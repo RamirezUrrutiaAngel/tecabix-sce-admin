@@ -20,7 +20,6 @@ package mx.tecabix.service.controller;
 import java.util.HashMap;
 import mx.tecabix.db.entity.Trabajador;
 import mx.tecabix.service.TecabixService;
-import mx.tecabix.service.page.PerfilPage;
 import mx.tecabix.service.page.TrabajadorPage;
 import org.springframework.http.HttpMethod;
 
@@ -86,4 +85,8 @@ public class TrabajadorController extends TecabixService<Trabajador, TrabajadorP
         return getPeticion(HttpMethod.GET, URL_TRABAJADOR, arg);
     }
     
+    public Trabajador save(Trabajador save)throws Exception{
+        TecabixService<Trabajador,Trabajador> service = new TecabixService<>(Trabajador.class);
+        return service.getPeticion(HttpMethod.POST, URL_TRABAJADOR, save);
+    }
 }

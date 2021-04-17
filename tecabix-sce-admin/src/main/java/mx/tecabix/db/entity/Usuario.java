@@ -41,6 +41,10 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 8367658930410205355L;
+
+    public static final short SIZE_NOMBRE = 45;
+    public static final short SIZE_CORREO = 45;
+
     @Id
     private Long id;
     @Column(name = "nombre")

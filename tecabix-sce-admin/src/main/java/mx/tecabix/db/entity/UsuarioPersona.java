@@ -41,7 +41,6 @@ public class UsuarioPersona implements Serializable {
     private static final long serialVersionUID = 9003283526926309837L;
     @Id
     private Long id;
-    @JsonProperty(access = Access.WRITE_ONLY)
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;

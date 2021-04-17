@@ -36,15 +36,17 @@ import javax.persistence.OneToOne;
 @Entity
 public class PersonaFisica implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 701859570029260114L;
+
+    public static final short SIZE_NOMBRE = 45;
+    public static final short SIZE_APELLIDO_PATERNO = 15;
+    public static final short SIZE_APELLIDO_MATERNO = 15;
+
     @Id
     private Long id;
     @OneToOne
     @JoinColumn(name = "id_persona")
-    private Persona presona;
+    private Persona persona;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "apellido_paterno")
@@ -78,12 +80,12 @@ public class PersonaFisica implements Serializable {
         this.id = id;
     }
 
-    public Persona getPresona() {
-        return presona;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setPresona(Persona presona) {
-        this.presona = presona;
+    public void setPersona(Persona presona) {
+        this.persona = presona;
     }
 
     public String getNombre() {

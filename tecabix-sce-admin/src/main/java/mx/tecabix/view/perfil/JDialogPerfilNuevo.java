@@ -513,7 +513,7 @@ public class JDialogPerfilNuevo extends javax.swing.JDialog {
 
     private void jTextFieldNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyTyped
         String aux = jTextFieldNombre.getText()+evt.getKeyChar();
-        if(auth.isNotValid(Auth.TIPO_NUMERIC_SPACE, Perfil.SIZE_NOMBRE, aux)) {
+        if(auth.isNotValid(Auth.TIPO_ALFA_NUMERIC_SPACE, Perfil.SIZE_NOMBRE, aux)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldNombreKeyTyped

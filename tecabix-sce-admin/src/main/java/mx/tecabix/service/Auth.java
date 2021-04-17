@@ -58,10 +58,10 @@ public class Auth {
             }
             if (item.getNombre().equalsIgnoreCase(authority)) {
                 Catalogo estatus = item.getEstatus();
-                if(estatus == null){
+                if (estatus == null) {
                     continue;
                 }
-                if(estatus.getNombre().equalsIgnoreCase("ACTIVO")){
+                if (estatus.getNombre().equalsIgnoreCase("ACTIVO")) {
                     return true;
                 }
             }
@@ -92,7 +92,7 @@ public class Auth {
     private static final String ALFA_NUMERIC_SPACE = "[a-zA-Z0-9[áéíóúÁÉÍÓÚñÑ\\s]]+";
     private static final String ALFA_NUMERIC_SPACE_WITH_SPECIAL_SYMBOLS = "[a-zA-Z0-9[.,():¿?!¡_&%$#@|áéíóúÁÉÍÓÚñÑ\\s]]+";
     private static final String TEL = "([(]{1}[0-9]{2,3}[)]{1}[\\s]{1}){0,1}([0-9]{2,4}[\\s])*[0-9]{2,8}";
-    private static final String EMAIL = "[a-zA-Z0-9]{1}[a-zA-Z0-9[._]]*[a-zA-Z0-9]{1}[@]{1}[a-zA-Z]{1}[a-zA-Z0-9]+([.]{1}[a-zA-Z]{2,4}){1,2}";
+    private static final String EMAIL = "[a-zA-Z0-9]{1}[a-zA-Z0-9[._]]*[a-zA-Z0-9]{1}[@]{1}[a-zA-Z0-9]+[a-zA-Z]{1}[a-zA-Z0-9]+([.]{1}[a-zA-Z]{2,4}){1,2}";
     private static final String VARIABLE = "[a-zA-Z]+([_]{1}[a-zA-Z0-9]+)*[a-zA-Z0-9]+";
     private static final String NUMERIC = "[0-9]+";
     private static final String NUMERIC_SPACE = "[0-9]+[0-9[\\s]]*[0-9]+";
@@ -105,23 +105,23 @@ public class Auth {
         return isValid(TIPO_OBJECT, Integer.MAX_VALUE, arg);
     }
 
-    public boolean isNotValid(int size, Object arg) {
+    public boolean isNotValid(double size, Object arg) {
         return isNotValid(TIPO_OBJECT, size, arg);
     }
 
-    public boolean isValid(int size, Object arg) {
+    public boolean isValid(double size, Object arg) {
         return isValid(TIPO_OBJECT, size, arg);
     }
 
-    public boolean isNotValid(byte tipo, int size, Object arg) {
+    public boolean isNotValid(byte tipo, double size, Object arg) {
         return !isValid(tipo, size, arg);
     }
 
-    public boolean isValid(byte tipo, int size, Object arg) {
+    public final boolean isValid(byte tipo, double size, Object arg) {
         if (arg == null) {
             return false;
         }
-        if (arg.getClass().equals(String.class) || arg.getClass().equals(StringBuilder.class)) {
+        if (arg instanceof String || arg instanceof StringBuilder) {
             String text = arg.toString();
             if (text.trim().isEmpty() || text.length() > size) {
                 return false;
@@ -145,26 +145,19 @@ public class Auth {
             } else if (tipo == TIPO_VARIABLE) {
                 return Pattern.matches(VARIABLE, text);
             }
-        } else if (arg.getClass().equals(Integer.class) || arg.getClass().equals(Long.class)) {
-            Long num = Long.parseLong(arg.toString());
-            if (tipo == TIPO_NUMERIC_NATURAL) {
-                return num > 0;
-            } else if (tipo == TIPO_NUMERIC_POSITIVO) {
-                return num > -1;
-            } else if (tipo == TIPO_NUMERIC_NEGATIVO) {
-                return num < 0;
-            }
-        } else if (arg.getClass().equals(Float.class) || arg.getClass().equals(Double.class)) {
+        } else if (arg instanceof Integer || arg instanceof Float || arg instanceof Long || arg instanceof Double) {
             Double num = Double.parseDouble(arg.toString());
             if (tipo == TIPO_NUMERIC_NATURAL) {
-                long aux = num.longValue();
-                return num > 0 && aux == num.doubleValue();
+                return num >= 0 && num <= size;
             } else if (tipo == TIPO_NUMERIC_POSITIVO) {
-                return num > -1;
+                return num > 0 && num <= size;
             } else if (tipo == TIPO_NUMERIC_NEGATIVO) {
-                return num < 0;
+                return num < 0 && num >= ((size < 0) ? size : -1 * size);
+            } else if (tipo == TIPO_NUMERIC) {
+                return num <= size;
             }
         }
         return true;
     }
+
 }

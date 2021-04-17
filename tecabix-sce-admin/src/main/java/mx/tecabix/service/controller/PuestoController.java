@@ -33,7 +33,8 @@ import org.springframework.http.HttpMethod;
 public class PuestoController extends TecabixService<Puesto, PuestoPage>{
     
     private static final String URL_PUESTO = "/puesto/v1";
-
+    private static final String URL_FIND_BY_DEPARTAMENTO_CLAVE = "/puesto/v1/find-by-departamento-clave";
+    
     private static final String ELEMENTS = "elements";
     private static final String PAGE = "page";
     private static final String NOMBRE = "NOMBRE";
@@ -71,6 +72,14 @@ public class PuestoController extends TecabixService<Puesto, PuestoPage>{
         arg.put(ELEMENTS, elements);
         arg.put(PAGE, page);
         return getPeticion(HttpMethod.GET, URL_PUESTO, arg);
+    }
+    
+    public PuestoPage findByDepartamentoClave(UUID clave, byte elements, short page) throws Exception {
+        HashMap<String, Object> arg = new HashMap<>();
+        arg.put(ELEMENTS, elements);
+        arg.put(PAGE, page);
+        arg.put(CLAVE, clave);
+        return getPeticion(HttpMethod.GET, URL_FIND_BY_DEPARTAMENTO_CLAVE, arg);
     }
     
     public Puesto save(Puesto save) throws Exception {

@@ -31,6 +31,7 @@ import mx.tecabix.view.perfil.JPanelPerfil;
 import mx.tecabix.view.plantel.JPanelPlantel;
 import mx.tecabix.view.puesto.JPanelPuesto;
 import mx.tecabix.view.sesion.JPanelSesion;
+import mx.tecabix.view.trabajador.JPanelTrabajador;
 /**
  * 
  * @author Ramirez Urrutia Angel Abinadi
@@ -44,6 +45,7 @@ public class Home extends javax.swing.JFrame {
     private JPanelDepartamento jPanelDepartamento;
     private JPanelPuesto jPanelPuesto;
     private JPanelPlantel jPanelPlantel;
+    private JPanelTrabajador jPanelTrabajador;
 
     public Home() {
         initComponents();
@@ -96,6 +98,11 @@ public class Home extends javax.swing.JFrame {
                 if(auth.isAuthorized(PLANTEL)){
                      jPanelPlantel = new JPanelPlantel(home);
                      getjTabbedPane().add(jPanelPlantel, " Plantel ");
+                }
+                getjProgressBar().setValue(50);
+                if(auth.isAuthorized(PLANTEL)){
+                     jPanelTrabajador = new JPanelTrabajador(home);
+                     getjTabbedPane().add(jPanelTrabajador, " Trabajador ");
                 }
                 getjProgressBar().setValue(100);
             }
@@ -231,6 +238,8 @@ public class Home extends javax.swing.JFrame {
             jPanelPuesto.init();
         } else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelPlantel.class)) {
             jPanelPlantel.init();
+        }else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelTrabajador.class)) {
+            jPanelTrabajador.init();
         }
     }//GEN-LAST:event_jTabbedPaneStateChanged
 

@@ -39,6 +39,10 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class Trabajador implements Serializable {
 
     private static final long serialVersionUID = -7407043110565368553L;
+    
+    public static final short SIZE_CURP = 19;
+    public static final short SIZE_URL_IMG = 200;
+    
     @Id
     private Long id;
     @Column(name = "curp")
@@ -54,7 +58,6 @@ public class Trabajador implements Serializable {
     private Plantel plantel;
     @ManyToOne
     @JoinColumn(name = "id_jefe")
-    @JsonProperty(access = Access.WRITE_ONLY)
     private Trabajador jefe;
     @Column(name = "url_imagen")
     private String urlImagen;
@@ -84,8 +87,8 @@ public class Trabajador implements Serializable {
         return CURP;
     }
 
-    public void setCURP(String cURP) {
-        CURP = cURP;
+    public void setCURP(String curp) {
+        CURP = curp;
     }
 
     public PersonaFisica getPersonaFisica() {
