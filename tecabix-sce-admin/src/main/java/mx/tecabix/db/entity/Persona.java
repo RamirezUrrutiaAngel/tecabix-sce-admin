@@ -62,7 +62,6 @@ public class Persona implements Serializable {
     private UUID clave;
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "persona", cascade = CascadeType.REMOVE)
     private UsuarioPersona usuarioPersona;
-    @JsonProperty(access = Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "persona", cascade = CascadeType.REMOVE)
     private List<Contacto> contactos;
 

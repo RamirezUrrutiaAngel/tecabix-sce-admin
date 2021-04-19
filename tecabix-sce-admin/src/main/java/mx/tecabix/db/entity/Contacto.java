@@ -26,7 +26,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 /**
  *
@@ -34,13 +35,13 @@ import javax.persistence.Table;
  *
  */
 @Entity()
-@Table(name = "contacto")
 public class Contacto implements Serializable {
 
     private static final long serialVersionUID = 7247338251404078667L;
     @Id
     @Column(name = "id_contacto", unique = true, nullable = false)
     private Long id;
+    @JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_persona")
     private Persona persona;

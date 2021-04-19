@@ -18,7 +18,6 @@
 package mx.tecabix;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
-import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;

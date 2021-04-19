@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import static javax.swing.SwingConstants.RIGHT;
@@ -356,13 +357,13 @@ public class JPanelTrabajador extends javax.swing.JPanel {
     }
     
     private void ver(){
-//        int selected = jTable.getSelectedRow();
-//        if(selected >= 0 && selected < trabajadores.size()){
-//            Departamento departamento = trabajadores.get(selected);
-//            JDialogDepartamentoVer jddv = new JDialogDepartamentoVer(parent, departamento);
-//        }else{
-//            JOptionPane.showMessageDialog(parent, "No se puede realizar la accion", "Warning", JOptionPane.WARNING_MESSAGE);
-//        }
+        int selected = jTable.getSelectedRow();
+        if(selected >= 0 && selected < trabajadores.size()){
+            Trabajador trabajador = trabajadores.get(selected);
+            JDialogTrabajadorVer jddv = new JDialogTrabajadorVer(parent, trabajador);
+        }else{
+            JOptionPane.showMessageDialog(parent, "No se puede realizar la accion", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
     private void editar(){
 //        int selected = jTable.getSelectedRow();
@@ -702,7 +703,7 @@ public class JPanelTrabajador extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
-        JDialogDepartamentoNuevo d = new JDialogDepartamentoNuevo(parent);
+        JDialogTrabajadorNuevo jdtn = new JDialogTrabajadorNuevo(parent);
         init();
     }//GEN-LAST:event_jMenuItemNuevoActionPerformed
 
