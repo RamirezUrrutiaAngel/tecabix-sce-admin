@@ -18,24 +18,23 @@
 package mx.tecabix.db.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import java.util.Objects;
+import javax.persistence.GeneratedValue;
 
 /**
  *
  * @author Ramirez Urrutia Angel Abinadi
  *
  */
-@Entity()
+@Entity
 public class Catalogo implements Serializable {
 
     private static final long serialVersionUID = 8898558749708373148L;
@@ -45,39 +44,24 @@ public class Catalogo implements Serializable {
     public static final short SIZE_NOMBRE_COMPLETO = 250;
 
     @Id
-    private Integer id;
-    @Column(name = "nombre")
+    @GeneratedValue
+    private long id;
     private String nombre;
     @JsonProperty(access = Access.WRITE_ONLY)
-    @Column(name = "nombre_completo")
     private String nombreCompleto;
-    @Column(name = "descripcion")
     private String descripcion;
     @JsonProperty(access = Access.WRITE_ONLY)
-    @Column(name = "orden")
     private Integer orden;
     @JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne
-    @JoinColumn(name = "id_catalogo_tipo")
     private CatalogoTipo catalogoTipo;
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @Column(name = "id_usuario_modificado")
-    private Long idUsuarioModificado;
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @Column(name = "fecha_modificado")
-    private LocalDateTime fechaDeModificacion;
-    @ManyToOne
-    @JoinColumn(name = "id_estatus")
-    @JsonProperty(access = Access.WRITE_ONLY)
-    private Catalogo estatus;
-    @Column(name = "clave")
-    private UUID clave;
+    private String clave;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -121,36 +105,36 @@ public class Catalogo implements Serializable {
         this.catalogoTipo = catalogoTipo;
     }
 
-    public Long getIdUsuarioModificado() {
-        return idUsuarioModificado;
-    }
-
-    public void setIdUsuarioModificado(Long idUsuarioModificado) {
-        this.idUsuarioModificado = idUsuarioModificado;
-    }
-
-    public LocalDateTime getFechaDeModificacion() {
-        return fechaDeModificacion;
-    }
-
-    public void setFechaDeModificacion(LocalDateTime fechaDeModificacion) {
-        this.fechaDeModificacion = fechaDeModificacion;
-    }
-
-    public Catalogo getEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(Catalogo estatus) {
-        this.estatus = estatus;
-    }
-
     public UUID getClave() {
-        return clave;
+        return UUID.fromString(clave);
     }
 
     public void setClave(UUID clave) {
-        this.clave = clave;
+        this.clave = clave.toString();
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.clave);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Catalogo other = (Catalogo) obj;
+        if (!Objects.equals(this.clave, other.clave)) {
+            return false;
+        }
+        return true;
+    }
 }

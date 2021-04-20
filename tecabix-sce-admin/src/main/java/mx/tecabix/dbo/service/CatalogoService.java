@@ -34,7 +34,7 @@ public class CatalogoService extends DataBaseJPA{
     
     private static final String SQL_FIND_NOMBRE ="SELECT c FROM CatalogoTipo c WHERE c.nombre = :nombre";
     
-    public Integer persist(CatalogoTipo save){
+    public CatalogoTipo persist(CatalogoTipo save){
         List<Catalogo> list = save.getCatalogos();
         if(list == null){
             list = new ArrayList<>();
@@ -51,7 +51,7 @@ public class CatalogoService extends DataBaseJPA{
         em.getTransaction().commit();
         
         em.close();
-        return save.getId();        
+        return save;        
     }
     
     public CatalogoTipo findByNombre(String nombre){
