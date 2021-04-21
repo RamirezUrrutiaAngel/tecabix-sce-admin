@@ -18,48 +18,37 @@
 package mx.tecabix.db.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  *
  * @author Ramirez Urrutia Angel Abinadi
  *
  */
-@Entity()
-@Table(name = "configuracion")
+@Entity
 public class Configuracion implements Serializable {
 
     private static final long serialVersionUID = -3454681497916100291L;
     @Id
-    private Long id;
+    @GeneratedValue
+    private long id;
     @ManyToOne
-    @JoinColumn(name = "id_tipo")
     private Catalogo tipo;
-    @Column(name = "valor")
     private String valor;
-    @Column(name = "id_usuario_modificado")
-    private Long idUsuarioModificado;
-    @Column(name = "fecha_modificado")
-    private LocalDateTime fechaDeModificacion;
     @ManyToOne
-    @JoinColumn(name = "id_estatus")
     private Catalogo estatus;
-    @Column(name = "clave")
     private UUID clave;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -77,22 +66,6 @@ public class Configuracion implements Serializable {
 
     public void setValor(String valor) {
         this.valor = valor;
-    }
-
-    public Long getIdUsuarioModificado() {
-        return idUsuarioModificado;
-    }
-
-    public void setIdUsuarioModificado(Long idUsuarioModificado) {
-        this.idUsuarioModificado = idUsuarioModificado;
-    }
-
-    public LocalDateTime getFechaDeModificacion() {
-        return fechaDeModificacion;
-    }
-
-    public void setFechaDeModificacion(LocalDateTime fechaDeModificacion) {
-        this.fechaDeModificacion = fechaDeModificacion;
     }
 
     public Catalogo getEstatus() {
