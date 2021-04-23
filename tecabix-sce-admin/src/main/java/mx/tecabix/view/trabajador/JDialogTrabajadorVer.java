@@ -38,6 +38,8 @@ import mx.tecabix.db.entity.Perfil;
 import mx.tecabix.db.entity.Plantel;
 import mx.tecabix.db.entity.Puesto;
 import mx.tecabix.db.entity.Trabajador;
+import mx.tecabix.db.entity.Usuario;
+import mx.tecabix.db.entity.UsuarioPersona;
 import mx.tecabix.service.controller.PerfilController;
 import mx.tecabix.view.ErrorLog;
 import mx.tecabix.view.ModelT;
@@ -86,7 +88,11 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
         jTextFieldCodigoPostal.setText(trabajador.getPersonaFisica().getDireccion().getCodigoPostal());
         jTextFieldAsentamiento.setText(trabajador.getPersonaFisica().getDireccion().getAsentamiento());
         jTextFieldReferencia.setText(trabajador.getPersonaFisica().getDireccion().getReferencia());
-        
+        jComboBoxPlantel.addItem(trabajador.getPlantel().getNombre());
+        jComboBoxDepartamento.addItem(trabajador.getPuesto().getDepartamento().getNombre());
+        jComboBoxPuesto.addItem(trabajador.getPuesto().getNombre());
+        contactos = trabajador.getPersonaFisica().getPersona().getContactos();
+        counstrurTabla();
         setVisible(true);
     }
 
@@ -219,7 +225,7 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
         jTextFieldAsentamiento = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jTextFieldReferencia = new javax.swing.JTextField();
-        jButtonSiguiente01 = new javax.swing.JButton();
+        jButtonAceptar01 = new javax.swing.JButton();
         jComboBoxEstados = new javax.swing.JComboBox<>();
         jComboBoxMunicipio = new javax.swing.JComboBox<>();
         jPanelContacto = new javax.swing.JPanel();
@@ -227,29 +233,16 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
-        jButtonSiguiente02 = new javax.swing.JButton();
-        jPanelUsuario = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jCheckBoxAgregarUsuario = new javax.swing.JCheckBox();
-        jLabeCorreo = new javax.swing.JLabel();
-        jTextFieldCorreo = new javax.swing.JTextField();
-        jLabelUsuario = new javax.swing.JLabel();
-        jTextFieldUsuario = new javax.swing.JTextField();
-        jLabelPerfil = new javax.swing.JLabel();
-        jComboBoxPerfil = new javax.swing.JComboBox<>();
-        jButtonSiguiente03 = new javax.swing.JButton();
+        jButtonAceptar02 = new javax.swing.JButton();
         jPanelTrabajador = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButtonGuardar = new javax.swing.JButton();
+        jButtonAceptar03 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jComboBoxPlantel = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         jComboBoxDepartamento = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jComboBoxPuesto = new javax.swing.JComboBox<>();
-        jLabel23 = new javax.swing.JLabel();
-        jButtonJefe = new javax.swing.JButton();
-        jTextFieldJefe = new javax.swing.JTextField();
 
         jMenuItemEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/16/basura.png"))); // NOI18N
         jMenuItemEliminar.setText("Eliminar");
@@ -383,7 +376,7 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(jButtonAceptar00))
         );
 
@@ -444,8 +437,13 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
 
         jTextFieldReferencia.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
-        jButtonSiguiente01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/24/cheque.png"))); // NOI18N
-        jButtonSiguiente01.setText("Siguiente");
+        jButtonAceptar01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/24/cheque.png"))); // NOI18N
+        jButtonAceptar01.setText("Aceptar");
+        jButtonAceptar01.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptar01ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -464,7 +462,7 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
                         .addComponent(jTextFieldReferencia))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonSiguiente01, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonAceptar01, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -526,8 +524,8 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jTextFieldReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jButtonSiguiente01))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jButtonAceptar01))
         );
 
         javax.swing.GroupLayout jPanelDireccionLayout = new javax.swing.GroupLayout(jPanelDireccion);
@@ -576,12 +574,17 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jButtonSiguiente02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/24/cheque.png"))); // NOI18N
-        jButtonSiguiente02.setText("Siguiente");
+        jButtonAceptar02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/24/cheque.png"))); // NOI18N
+        jButtonAceptar02.setText("Aceptar");
+        jButtonAceptar02.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptar02ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -593,7 +596,7 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 345, Short.MAX_VALUE)
-                        .addComponent(jButtonSiguiente02, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonAceptar02, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -602,7 +605,7 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(24, 24, 24)
-                .addComponent(jButtonSiguiente02))
+                .addComponent(jButtonAceptar02))
         );
 
         javax.swing.GroupLayout jPanelContactoLayout = new javax.swing.GroupLayout(jPanelContacto);
@@ -624,107 +627,15 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
 
         jTabbedPane.addTab("Contacto", jPanelContacto);
 
-        jPanelUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario"));
-
-        jCheckBoxAgregarUsuario.setText("Agregar cuenta de usuario al trabajador");
-        jCheckBoxAgregarUsuario.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCheckBoxAgregarUsuarioItemStateChanged(evt);
-            }
-        });
-
-        jLabeCorreo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabeCorreo.setText("Correo:");
-        jLabeCorreo.setEnabled(false);
-
-        jTextFieldCorreo.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jTextFieldCorreo.setEnabled(false);
-
-        jLabelUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelUsuario.setText("Usuario:");
-        jLabelUsuario.setEnabled(false);
-
-        jTextFieldUsuario.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jTextFieldUsuario.setEnabled(false);
-
-        jLabelPerfil.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelPerfil.setText("Perfil:");
-        jLabelPerfil.setEnabled(false);
-
-        jComboBoxPerfil.setEnabled(false);
-
-        jButtonSiguiente03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/24/cheque.png"))); // NOI18N
-        jButtonSiguiente03.setText("Siguiente");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBoxAgregarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabeCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldCorreo))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldUsuario))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabelPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxPerfil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonSiguiente03, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBoxAgregarUsuario)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabeCorreo)
-                    .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUsuario)
-                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPerfil)
-                    .addComponent(jComboBoxPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(jButtonSiguiente03))
-        );
-
-        javax.swing.GroupLayout jPanelUsuarioLayout = new javax.swing.GroupLayout(jPanelUsuario);
-        jPanelUsuario.setLayout(jPanelUsuarioLayout);
-        jPanelUsuarioLayout.setHorizontalGroup(
-            jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanelUsuarioLayout.setVerticalGroup(
-            jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTabbedPane.addTab("Usuario", jPanelUsuario);
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Trabajador"));
 
-        jButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/24/cheque.png"))); // NOI18N
-        jButtonGuardar.setText("Guardar");
+        jButtonAceptar03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/24/cheque.png"))); // NOI18N
+        jButtonAceptar03.setText("Aceptar");
+        jButtonAceptar03.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptar03ActionPerformed(evt);
+            }
+        });
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel20.setText("Plantel:");
@@ -741,19 +652,6 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
 
         jComboBoxPuesto.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel23.setText("Jefe directo:");
-
-        jButtonJefe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/16/lupa.png"))); // NOI18N
-        jButtonJefe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonJefeActionPerformed(evt);
-            }
-        });
-
-        jTextFieldJefe.setEditable(false);
-        jTextFieldJefe.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -763,27 +661,19 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonAceptar03, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxPlantel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jComboBoxPlantel, 0, 327, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBoxDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jButtonJefe)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldJefe, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
-                            .addComponent(jComboBoxPuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jComboBoxPuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -801,14 +691,8 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jComboBoxPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonJefe))
-                    .addComponent(jTextFieldJefe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                .addComponent(jButtonGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                .addComponent(jButtonAceptar03))
         );
 
         javax.swing.GroupLayout jPanelTrabajadorLayout = new javax.swing.GroupLayout(jPanelTrabajador);
@@ -859,72 +743,35 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jMenuItemEliminarActionPerformed
 
-    private void jCheckBoxAgregarUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxAgregarUsuarioItemStateChanged
-        boolean selected = jCheckBoxAgregarUsuario.isSelected();
-        jLabeCorreo.setEnabled(selected);
-        jLabelPerfil.setEnabled(selected);
-        jLabelUsuario.setEnabled(selected);
-        jTextFieldCorreo.setEnabled(selected);
-        jTextFieldUsuario.setEnabled(selected);
-        jComboBoxPerfil.setEnabled(selected);
-        if (perfiles == null) {
-            Proceso p = new Proceso(THIS) {
-                @Override
-                public void proceso() {
-                    try {
-                        PerfilController pc = new PerfilController();
-                        byte max = Byte.MAX_VALUE;
-                        short zero = 0;
-                        getjProgressBar().setValue(30);
-                        perfiles = pc.find("", 0, max, zero).getData();
-                        getjProgressBar().setValue(80);
-                        perfiles.sort(new Comparator<Perfil>() {
-                            @Override
-                            public int compare(Perfil o1, Perfil o2) {
-                                return o1.getNombre().compareTo(o2.getNombre());
-                            }
-                        });
-
-                        for (int i = 0; i < perfiles.size(); i++) {
-                            jComboBoxPerfil.addItem(perfiles.get(i).getNombre());
-                        }
-                        jComboBoxPerfil.setSelectedIndex(-1);
-                    } catch (Exception ex) {
-                        setVisible(false);
-                        Logger.getLogger(JDialogTrabajadorVer.class.getName()).log(Level.SEVERE, null, ex);
-                        ErrorLog err = new ErrorLog(THIS, ex);
-                    }
-                }
-            };
-        }
-    }//GEN-LAST:event_jCheckBoxAgregarUsuarioItemStateChanged
-
-    private void jButtonJefeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJefeActionPerformed
-        
-    }//GEN-LAST:event_jButtonJefeActionPerformed
-
     private void jButtonAceptar00ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptar00ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonAceptar00ActionPerformed
 
+    private void jButtonAceptar01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptar01ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonAceptar01ActionPerformed
+
+    private void jButtonAceptar02ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptar02ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonAceptar02ActionPerformed
+
+    private void jButtonAceptar03ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptar03ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonAceptar03ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar00;
-    private javax.swing.JButton jButtonGuardar;
-    private javax.swing.JButton jButtonJefe;
-    private javax.swing.JButton jButtonSiguiente01;
-    private javax.swing.JButton jButtonSiguiente02;
-    private javax.swing.JButton jButtonSiguiente03;
-    private javax.swing.JCheckBox jCheckBoxAgregarUsuario;
+    private javax.swing.JButton jButtonAceptar01;
+    private javax.swing.JButton jButtonAceptar02;
+    private javax.swing.JButton jButtonAceptar03;
     private javax.swing.JComboBox<String> jComboBoxDepartamento;
     private javax.swing.JComboBox<String> jComboBoxEstados;
     private javax.swing.JComboBox<String> jComboBoxMunicipio;
-    private javax.swing.JComboBox<String> jComboBoxPerfil;
     private javax.swing.JComboBox<String> jComboBoxPlantel;
     private javax.swing.JComboBox<String> jComboBoxPuesto;
     private javax.swing.JComboBox<String> jComboBoxSexo;
     private javax.swing.JFormattedTextField jFormattedTextNacimiento;
-    private javax.swing.JLabel jLabeCorreo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -936,7 +783,6 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -944,20 +790,16 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelPerfil;
-    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JMenuItem jMenuItemEliminar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanelContacto;
     private javax.swing.JPanel jPanelDireccion;
     private javax.swing.JPanel jPanelPersona;
     private javax.swing.JPanel jPanelTrabajador;
-    private javax.swing.JPanel jPanelUsuario;
     private javax.swing.JPopupMenu jPopupMenu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane;
@@ -966,8 +808,6 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldCURP;
     private javax.swing.JTextField jTextFieldCalle;
     private javax.swing.JTextField jTextFieldCodigoPostal;
-    private javax.swing.JTextField jTextFieldCorreo;
-    private javax.swing.JTextField jTextFieldJefe;
     private javax.swing.JTextField jTextFieldMaterno;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldNumExt;
@@ -975,6 +815,5 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldPaterno;
     private javax.swing.JTextField jTextFieldRFC;
     private javax.swing.JTextField jTextFieldReferencia;
-    private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }
