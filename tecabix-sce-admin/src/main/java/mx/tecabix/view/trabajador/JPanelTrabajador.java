@@ -384,9 +384,17 @@ public class JPanelTrabajador extends javax.swing.JPanel {
     
     private void ver(){
         int selected = jTable.getSelectedRow();
+        int CLAVE = 6;
         if(selected >= 0 && selected < trabajadores.size()){
             Trabajador trabajador = trabajadores.get(selected);
             JDialogTrabajadorVer jddv = new JDialogTrabajadorVer(parent, trabajador);
+            if(jddv.getAccion() != JDialogTrabajadorVer.ACCION_NINGUNO){
+                Trabajador trabajadorBuscando = jddv.getTrabajador();
+                jTextFieldSearch.setText(trabajadorBuscando.getClave().toString());
+                jComboBoxBy.setSelectedIndex(CLAVE);
+                search = jTextFieldSearch.getText();
+                init();
+            }
         }else{
             JOptionPane.showMessageDialog(parent, "No se puede realizar la accion", "Warning", JOptionPane.WARNING_MESSAGE);
         }
