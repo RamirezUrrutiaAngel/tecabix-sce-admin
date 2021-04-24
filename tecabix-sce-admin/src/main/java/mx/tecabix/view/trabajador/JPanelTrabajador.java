@@ -23,6 +23,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -202,16 +203,41 @@ public class JPanelTrabajador extends javax.swing.JPanel {
     }
     
     private void cargarDatos(short page) {
+        final byte CLAVE = 6;
         try {
             this.pagina = page;
             TrabajadorController trabajadorController = new TrabajadorController();
             byte elements = 25;
            
             int by = jComboBoxBy.getSelectedIndex();
+            TrabajadorPage response = null;
             if (search == null) {
                 search = new String();
             }
-            TrabajadorPage response = trabajadorController.find(search, by, elements, page);
+            if(CLAVE == by){
+                if(!search.isEmpty()){
+                    try {
+                        Trabajador trabajador = trabajadorController.findByClave(UUID.fromString(search));
+                        response = new TrabajadorPage();
+                        response.setData(new ArrayList<Trabajador>());
+                        response.getData().add(trabajador);
+                        response.setSize(1);
+                        response.setNumber(1);
+                        response.setNumberOfElements(1);
+                        response.setTotalElements(1);
+                        response.setTotalPages(1);
+                    } catch (Exception e) {
+                        Logger.getLogger(JPanelSesion.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                    
+                }else{
+                    response = null;
+                }
+                
+            }else{
+                response = trabajadorController.find(search, by, elements, page);
+            }
+            
             if (response != null) {
                 this.trabajadores = response.getData();
                 if (!this.trabajadores.isEmpty()) {
@@ -517,7 +543,7 @@ public class JPanelTrabajador extends javax.swing.JPanel {
         jComboBox1.setEnabled(false);
 
         jComboBoxBy.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-        jComboBoxBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Descripción" }));
+        jComboBoxBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "A. Paterno", "A. Materno", "CURP", "Puesto", "Plantel", "Clave" }));
 
         jTextFieldSearch.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jTextFieldSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -554,7 +580,7 @@ public class JPanelTrabajador extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
