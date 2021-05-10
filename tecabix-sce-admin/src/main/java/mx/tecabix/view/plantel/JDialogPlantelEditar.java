@@ -90,7 +90,7 @@ public class JDialogPlantelEditar extends javax.swing.JDialog {
                 PlantelController plantelController = new PlantelController();
                 try {
                     trabajador = plantelController.findManagerByClave(plantel.getClave());
-                    jTextFieldGerente.setText(trabajador.getCURP());
+                    jTextFieldGerente.setText(trabajador.getSeguroSocial().getCURP());
                 } catch (Exception ex1) {
                     Logger.getLogger(JDialogPlantelEditar.class.getName()).log(Level.SEVERE, null, ex1);
                     trabajador = null;
@@ -522,7 +522,7 @@ public class JDialogPlantelEditar extends javax.swing.JDialog {
         JDialogPlantelSearchTrabajador searchGerente = new JDialogPlantelSearchTrabajador(this);
         if (searchGerente.getTrabajador() != null) {
             trabajador = searchGerente.getTrabajador();
-            jTextFieldGerente.setText(trabajador.getCURP());
+            jTextFieldGerente.setText(trabajador.getSeguroSocial().getCURP());
         }
     }//GEN-LAST:event_jButtonBuscarGerenteActionPerformed
 
@@ -537,7 +537,7 @@ public class JDialogPlantelEditar extends javax.swing.JDialog {
                         JDialogPlantelSearchTrabajador searchGerente = new JDialogPlantelSearchTrabajador(THIS);
                         if (searchGerente.getTrabajador() != null) {
                             trabajador = searchGerente.getTrabajador();
-                            jTextFieldGerente.setText(trabajador.getCURP());
+                            jTextFieldGerente.setText(trabajador.getSeguroSocial().getCURP());
                         }
                     }
                     Thread.sleep(500);

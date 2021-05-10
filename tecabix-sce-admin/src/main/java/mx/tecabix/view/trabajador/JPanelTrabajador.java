@@ -314,7 +314,7 @@ public class JPanelTrabajador extends javax.swing.JPanel {
                 
                 defaultTableModel.addRow(new java.util.Vector());
                 defaultTableModel.setValueAt(nombre.toString(),  i, 0);
-                defaultTableModel.setValueAt(trabajador.getCURP(),  i, 1);
+                defaultTableModel.setValueAt(trabajador.getSeguroSocial().getCURP(),  i, 1);
                 defaultTableModel.setValueAt(puesto.getNombre(),  i, 2);
                 defaultTableModel.setValueAt(plantel.getNombre(),  i, 3);
             }

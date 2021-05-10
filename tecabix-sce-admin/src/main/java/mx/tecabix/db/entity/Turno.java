@@ -19,17 +19,20 @@ package mx.tecabix.db.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import java.util.Objects;
 
 /**
  *
@@ -37,37 +40,21 @@ import java.util.Objects;
  *
  */
 @Entity
-public class Trabajador implements Serializable {
+public class Turno implements Serializable {
 
-    private static final long serialVersionUID = -7407043110565368553L;
-
-    public static final short SIZE_CURP = 19;
-    public static final short SIZE_URL_IMG = 200;
+    private static final long serialVersionUID = 2375902079042196833L;
 
     @Id
     private Long id;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "descripcion")
+    private String descripcion;
     @ManyToOne
-    @JoinColumn(name = "id_persona_fisica")
-    private PersonaFisica personaFisica;
-    @ManyToOne
-    @JoinColumn(name = "id_seguro_social")
-    private SeguroSocial seguroSocial;
-    @ManyToOne
-    @JoinColumn(name = "id_puesto")
-    private Puesto puesto;
-    @ManyToOne
-    @JoinColumn(name = "id_plantel")
-    private Plantel plantel;
-    @ManyToOne
-    @JoinColumn(name = "id_turno")
-    private Turno turno;
-    @ManyToOne
-    @JoinColumn(name = "id_salario")
-    private Salario salario;
-    @ManyToOne
-    @JoinColumn(name = "id_jefe")
-    private Trabajador jefe;
+    @JoinColumn(name = "id_tipo")
+    private Catalogo tipo;
     @Column(name = "id_empresa")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Long idEmpresa;
     @Column(name = "id_usuario_modificado")
     @JsonProperty(access = Access.WRITE_ONLY)
@@ -77,9 +64,12 @@ public class Trabajador implements Serializable {
     private LocalDateTime fechaDeModificacion;
     @ManyToOne
     @JoinColumn(name = "id_estatus")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Catalogo estatus;
     @Column(name = "clave")
     private UUID clave;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "turno", cascade = CascadeType.REMOVE)
+    private List<TurnoDia> TurnoDias;
 
     public Long getId() {
         return id;
@@ -89,60 +79,28 @@ public class Trabajador implements Serializable {
         this.id = id;
     }
 
-    public PersonaFisica getPersonaFisica() {
-        return personaFisica;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPersonaFisica(PersonaFisica personaFisica) {
-        this.personaFisica = personaFisica;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public SeguroSocial getSeguroSocial() {
-        return seguroSocial;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setSeguroSocial(SeguroSocial seguroSocial) {
-        this.seguroSocial = seguroSocial;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public Puesto getPuesto() {
-        return puesto;
+    public Catalogo getTipo() {
+        return tipo;
     }
 
-    public void setPuesto(Puesto puesto) {
-        this.puesto = puesto;
-    }
-
-    public Plantel getPlantel() {
-        return plantel;
-    }
-
-    public void setPlantel(Plantel plantel) {
-        this.plantel = plantel;
-    }
-
-    public Turno getTurno() {
-        return turno;
-    }
-
-    public void setTurno(Turno turno) {
-        this.turno = turno;
-    }
-
-    public Salario getSalario() {
-        return salario;
-    }
-
-    public void setSalario(Salario salario) {
-        this.salario = salario;
-    }
-
-    public Trabajador getJefe() {
-        return jefe;
-    }
-
-    public void setJefe(Trabajador jefe) {
-        this.jefe = jefe;
+    public void setTipo(Catalogo tipo) {
+        this.tipo = tipo;
     }
 
     public Long getIdEmpresa() {
@@ -185,11 +143,20 @@ public class Trabajador implements Serializable {
         this.clave = clave;
     }
 
+    public List<TurnoDia> getTurnoDias() {
+        return TurnoDias;
+    }
+
+    public void setTurnoDias(List<TurnoDia> turnoDias) {
+        TurnoDias = turnoDias;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 19 * hash + Objects.hashCode(this.clave);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+        return result;
     }
 
     @Override
@@ -203,8 +170,12 @@ public class Trabajador implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Trabajador other = (Trabajador) obj;
-        if (!Objects.equals(this.clave, other.clave)) {
+        Turno other = (Turno) obj;
+        if (clave == null) {
+            if (other.clave != null) {
+                return false;
+            }
+        } else if (!clave.equals(other.clave)) {
             return false;
         }
         return true;

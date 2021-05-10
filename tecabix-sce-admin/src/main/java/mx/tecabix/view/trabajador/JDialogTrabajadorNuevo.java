@@ -1149,7 +1149,7 @@ public class JDialogTrabajadorNuevo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "El formato del CURP es incorrecto", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        trabajador.setCURP(text);
+//        trabajador.setCURP(text);
         if (jComboBoxSexo.getSelectedIndex() != -1) {
             personaFisica.getSexo().setNombre(jComboBoxSexo.getSelectedItem().toString());
         }
@@ -1603,7 +1603,7 @@ public class JDialogTrabajadorNuevo extends javax.swing.JDialog {
         JDialogTrabajadorSearchTrabajador jdtst = new JDialogTrabajadorSearchTrabajador(THIS);
         if(jdtst.getTrabajador() != null){
             trabajador.setJefe(jdtst.getTrabajador());
-            jTextFieldJefe.setText(trabajador.getJefe().getCURP());
+            jTextFieldJefe.setText(trabajador.getJefe().getSeguroSocial().getCURP());
         }
     }//GEN-LAST:event_jButtonJefeActionPerformed
 

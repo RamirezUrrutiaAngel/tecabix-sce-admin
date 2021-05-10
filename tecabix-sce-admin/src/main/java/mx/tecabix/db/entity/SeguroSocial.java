@@ -18,6 +18,7 @@
 package mx.tecabix.db.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -29,7 +30,6 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import java.util.Objects;
 
 /**
  *
@@ -37,38 +37,38 @@ import java.util.Objects;
  *
  */
 @Entity
-public class Trabajador implements Serializable {
+public class SeguroSocial implements Serializable {
 
-    private static final long serialVersionUID = -7407043110565368553L;
+    private static final long serialVersionUID = 5434474820126276090L;
 
+    public static final short SIZE_NUMERO = 12;
+    public static final short SIZE_CIUDAD = 100;
     public static final short SIZE_CURP = 19;
+    public static final short SIZE_RFC = 16;
     public static final short SIZE_URL_IMG = 200;
+    public static final short SIZE_OBSERVACIONES_BAJA = 200;
 
     @Id
     private Long id;
+    @Column(name = "numero")
+    private String numero;
     @ManyToOne
-    @JoinColumn(name = "id_persona_fisica")
-    private PersonaFisica personaFisica;
-    @ManyToOne
-    @JoinColumn(name = "id_seguro_social")
-    private SeguroSocial seguroSocial;
-    @ManyToOne
-    @JoinColumn(name = "id_puesto")
-    private Puesto puesto;
-    @ManyToOne
-    @JoinColumn(name = "id_plantel")
-    private Plantel plantel;
-    @ManyToOne
-    @JoinColumn(name = "id_turno")
-    private Turno turno;
-    @ManyToOne
-    @JoinColumn(name = "id_salario")
-    private Salario salario;
-    @ManyToOne
-    @JoinColumn(name = "id_jefe")
-    private Trabajador jefe;
-    @Column(name = "id_empresa")
-    private Long idEmpresa;
+    @JoinColumn(name = "id_estado")
+    private Estado entidadFederativa;
+    @Column(name = "ciudad")
+    private String ciudad;
+    @Column(name = "curp")
+    private String CURP;
+    @Column(name = "rfc")
+    private String RFC;
+    @Column(name = "alta")
+    private LocalDate alta;
+    @Column(name = "baja")
+    private LocalDate baja;
+    @Column(name = "url_imagen")
+    private String urlImagen;
+    @Column(name = "observaciones_baja")
+    private String observacionesBaja;
     @Column(name = "id_usuario_modificado")
     @JsonProperty(access = Access.WRITE_ONLY)
     private Long idUsuarioModificado;
@@ -77,6 +77,7 @@ public class Trabajador implements Serializable {
     private LocalDateTime fechaDeModificacion;
     @ManyToOne
     @JoinColumn(name = "id_estatus")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Catalogo estatus;
     @Column(name = "clave")
     private UUID clave;
@@ -89,68 +90,76 @@ public class Trabajador implements Serializable {
         this.id = id;
     }
 
-    public PersonaFisica getPersonaFisica() {
-        return personaFisica;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setPersonaFisica(PersonaFisica personaFisica) {
-        this.personaFisica = personaFisica;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
-    public SeguroSocial getSeguroSocial() {
-        return seguroSocial;
+    public Estado getEntidadFederativa() {
+        return entidadFederativa;
     }
 
-    public void setSeguroSocial(SeguroSocial seguroSocial) {
-        this.seguroSocial = seguroSocial;
+    public void setEntidadFederativa(Estado entidadFederativa) {
+        this.entidadFederativa = entidadFederativa;
     }
 
-    public Puesto getPuesto() {
-        return puesto;
+    public String getCiudad() {
+        return ciudad;
     }
 
-    public void setPuesto(Puesto puesto) {
-        this.puesto = puesto;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
-    public Plantel getPlantel() {
-        return plantel;
+    public String getCURP() {
+        return CURP;
     }
 
-    public void setPlantel(Plantel plantel) {
-        this.plantel = plantel;
+    public void setCURP(String curp) {
+        this.CURP = curp;
     }
 
-    public Turno getTurno() {
-        return turno;
+    public String getRFC() {
+        return RFC;
     }
 
-    public void setTurno(Turno turno) {
-        this.turno = turno;
+    public void setRfc(String rfc) {
+        this.RFC = rfc;
     }
 
-    public Salario getSalario() {
-        return salario;
+    public LocalDate getAlta() {
+        return alta;
     }
 
-    public void setSalario(Salario salario) {
-        this.salario = salario;
+    public void setAlta(LocalDate alta) {
+        this.alta = alta;
     }
 
-    public Trabajador getJefe() {
-        return jefe;
+    public LocalDate getBaja() {
+        return baja;
     }
 
-    public void setJefe(Trabajador jefe) {
-        this.jefe = jefe;
+    public void setBaja(LocalDate baja) {
+        this.baja = baja;
     }
 
-    public Long getIdEmpresa() {
-        return idEmpresa;
+    public String getUrlImagen() {
+        return urlImagen;
     }
 
-    public void setIdEmpresa(Long idEmpresa) {
-        this.idEmpresa = idEmpresa;
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
+    }
+
+    public String getObservacionesBaja() {
+        return observacionesBaja;
+    }
+
+    public void setObservacionesBaja(String observaciones_baja) {
+        this.observacionesBaja = observaciones_baja;
     }
 
     public Long getIdUsuarioModificado() {
@@ -187,9 +196,10 @@ public class Trabajador implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 19 * hash + Objects.hashCode(this.clave);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+        return result;
     }
 
     @Override
@@ -203,8 +213,12 @@ public class Trabajador implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Trabajador other = (Trabajador) obj;
-        if (!Objects.equals(this.clave, other.clave)) {
+        SeguroSocial other = (SeguroSocial) obj;
+        if (clave == null) {
+            if (other.clave != null) {
+                return false;
+            }
+        } else if (!clave.equals(other.clave)) {
             return false;
         }
         return true;

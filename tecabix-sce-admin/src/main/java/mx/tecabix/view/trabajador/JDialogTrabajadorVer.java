@@ -84,7 +84,7 @@ public class JDialogTrabajadorVer extends javax.swing.JDialog {
         jTextFieldMaterno.setText(trabajador.getPersonaFisica().getApellidoMaterno());
         jComboBoxSexo.addItem(trabajador.getPersonaFisica().getSexo().getNombre());
         jFormattedTextNacimiento.setText(trabajador.getPersonaFisica().getFechaNacimiento().format(DateTimeFormatter.ISO_DATE));
-        jTextFieldCURP.setText(trabajador.getCURP());
+        jTextFieldCURP.setText(trabajador.getSeguroSocial().getCURP());
 
         jComboBoxEstados.addItem(trabajador.getPersonaFisica().getDireccion().getMunicipio().getEntidadFederativa().getNombre());
         jComboBoxMunicipio.addItem(trabajador.getPersonaFisica().getDireccion().getMunicipio().getNombre());

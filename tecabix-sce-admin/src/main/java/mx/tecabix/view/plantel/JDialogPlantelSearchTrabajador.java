@@ -240,7 +240,7 @@ public class JDialogPlantelSearchTrabajador extends javax.swing.JDialog {
                 
                 defaultTableModel.addRow(new java.util.Vector());
                 defaultTableModel.setValueAt(nombre.toString(),  i, 0);
-                defaultTableModel.setValueAt(trabajador.getCURP(),  i, 1);
+                defaultTableModel.setValueAt(trabajador.getSeguroSocial().getCURP(),  i, 1);
             }
             jTable.setModel(defaultTableModel);
             if(!this.trabajadores.isEmpty()){

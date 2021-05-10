@@ -65,7 +65,7 @@ public class JDialogPlantelVer extends javax.swing.JDialog {
                 PlantelController plantelController = new PlantelController();
                 try {
                     trabajador = plantelController.findManagerByClave(plantel.getClave());
-                    jTextFieldGerente.setText(trabajador.getCURP());
+                    jTextFieldGerente.setText(trabajador.getSeguroSocial().getCURP());
                 } catch (Exception ex1) {
                     Logger.getLogger(JDialogPlantelVer.class.getName()).log(Level.SEVERE, null, ex1);
                     trabajador = null;

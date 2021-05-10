@@ -494,7 +494,7 @@ public class JDialogPlantelNuevo extends javax.swing.JDialog {
         JDialogPlantelSearchTrabajador searchGerente = new JDialogPlantelSearchTrabajador(this);
         if(searchGerente.getTrabajador() != null){
             trabajador = searchGerente.getTrabajador();
-            jTextFieldGerente.setText(trabajador.getCURP());
+            jTextFieldGerente.setText(trabajador.getSeguroSocial().getCURP());
         }
     }//GEN-LAST:event_jButtonBuscarGerenteActionPerformed
 
@@ -509,7 +509,7 @@ public class JDialogPlantelNuevo extends javax.swing.JDialog {
                         JDialogPlantelSearchTrabajador searchGerente = new JDialogPlantelSearchTrabajador(THIS);
                         if(searchGerente.getTrabajador() != null){
                             trabajador = searchGerente.getTrabajador();
-                            jTextFieldGerente.setText(trabajador.getCURP());
+                            jTextFieldGerente.setText(trabajador.getSeguroSocial().getCURP());
                         }
                     }
                     Thread.sleep(500);
