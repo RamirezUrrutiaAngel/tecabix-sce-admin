@@ -32,6 +32,7 @@ import mx.tecabix.view.plantel.JPanelPlantel;
 import mx.tecabix.view.puesto.JPanelPuesto;
 import mx.tecabix.view.sesion.JPanelSesion;
 import mx.tecabix.view.trabajador.JPanelTrabajador;
+import mx.tecabix.view.turno.JPanelTurno;
 /**
  * 
  * @author Ramirez Urrutia Angel Abinadi
@@ -45,6 +46,7 @@ public class Home extends javax.swing.JFrame {
     private JPanelDepartamento jPanelDepartamento;
     private JPanelPuesto jPanelPuesto;
     private JPanelPlantel jPanelPlantel;
+    private JPanelTurno jPanelTurno;
     private JPanelTrabajador jPanelTrabajador;
 
     public Home() {
@@ -66,6 +68,10 @@ public class Home extends javax.swing.JFrame {
     private final String DEPARTAMENTO = "DEPARTAMENTO";
     private final String PUESTO = "PUESTO";
     private final String PLANTEL = "PLANTEL";
+    private final String TURNO = "TURNO";
+    private final String TRABAJADOR = "TRABAJADOR";
+    
+    
     public void cargarDatos() {
         Proceso proceso = new Proceso(this) {
             @Override
@@ -100,7 +106,12 @@ public class Home extends javax.swing.JFrame {
                      getjTabbedPane().add(jPanelPlantel, " Plantel ");
                 }
                 getjProgressBar().setValue(50);
-                if(auth.isAuthorized(PLANTEL)){
+                if(auth.isAuthorized(TURNO)){
+                     jPanelTurno = new JPanelTurno(home);
+                     getjTabbedPane().add(jPanelTurno, " Turno ");
+                }
+                getjProgressBar().setValue(60);
+                if(auth.isAuthorized(TRABAJADOR)){
                      jPanelTrabajador = new JPanelTrabajador(home);
                      getjTabbedPane().add(jPanelTrabajador, " Trabajador ");
                 }
@@ -238,6 +249,8 @@ public class Home extends javax.swing.JFrame {
             jPanelPuesto.init();
         } else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelPlantel.class)) {
             jPanelPlantel.init();
+        }else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelTurno.class)) {
+            jPanelTurno.init();
         }else if (jTabbedPane.getSelectedComponent().getClass().equals(JPanelTrabajador.class)) {
             jPanelTrabajador.init();
         }
