@@ -18,8 +18,12 @@
 package mx.tecabix.service.controller;
 
 import java.util.HashMap;
+import java.util.UUID;
+import mx.tecabix.db.entity.Perfil;
+import mx.tecabix.db.entity.Puesto;
 import mx.tecabix.db.entity.Turno;
 import mx.tecabix.service.TecabixService;
+import mx.tecabix.service.page.PuestoPage;
 import mx.tecabix.service.page.TurnoPage;
 import org.springframework.http.HttpMethod;
 
@@ -35,9 +39,6 @@ public class TurnoController extends TecabixService<Turno, TurnoPage> {
     private static final String PAGE = "page";
     private static final String NOMBRE = "NOMBRE";
     private static final String DESCRIPCION = "DESCRIPCION";
-    private static final String CURP = "CURP";
-    private static final String PUESTO = "PUESTO";
-    private static final String PLANTEL = "PLANTEL";
     private static final String SEARCH = "search";
     private static final String BY = "by";
     private static final String CLAVE = "clave";
@@ -65,5 +66,22 @@ public class TurnoController extends TecabixService<Turno, TurnoPage> {
         arg.put(ELEMENTS, elements);
         arg.put(PAGE, page);
         return getPeticion(HttpMethod.GET, URL_TURNO, arg);
+    }
+    
+    public Turno save(Turno save) throws Exception {
+        TecabixService<Turno,Turno> service = new TecabixService<>(Turno.class);
+        return service.getPeticion(HttpMethod.POST, URL_TURNO, save);
+    }
+    
+    public Turno update(Turno update) throws Exception {
+        TecabixService<Turno,Turno> service = new TecabixService<>(Turno.class);
+        return service.getPeticion(HttpMethod.PUT, URL_TURNO, update);
+    }
+    
+    public void delete(UUID clave) throws Exception {
+        TecabixService<?,?> service = new TecabixService<>(Turno.class);
+        HashMap<String,Object> arg = new HashMap<>();
+        arg.put(CLAVE, clave);
+        service.getPeticion(HttpMethod.DELETE, URL_TURNO,arg);
     }
 }

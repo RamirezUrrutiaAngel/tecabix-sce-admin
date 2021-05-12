@@ -35,7 +35,7 @@ import mx.tecabix.view.sesion.InicioSession;
 public class Admin {
 
     private static Home home = null;
-    private static final String VERCION = "2021.02.23 BETA";
+    private static final String VERCION = "2021.05 BETA";
     
     public static void main(String[] args) {
         

@@ -45,26 +45,14 @@ public class TurnoDia implements Serializable {
     private Long id;
     @JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne
-    @JoinColumn(name = "id_turno")
     private Turno turno;
     @ManyToOne
-    @JoinColumn(name = "id_dia")
     private Catalogo dia;
-    @Column(name = "inicio")
     private LocalTime inicio;
-    @Column(name = "fin")
     private LocalTime fin;
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @Column(name = "id_usuario_modificado")
-    private Long idUsuarioModificado;
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @Column(name = "fecha_modificado")
-    private LocalDateTime fechaDeModificacion;
     @ManyToOne
-    @JoinColumn(name = "id_estatus")
     @JsonProperty(access = Access.WRITE_ONLY)
     private Catalogo estatus;
-    @Column(name = "clave")
     private UUID clave;
 
     public Long getId() {
@@ -106,23 +94,7 @@ public class TurnoDia implements Serializable {
     public void setFin(LocalTime fin) {
         this.fin = fin;
     }
-
-    public Long getIdUsuarioModificado() {
-        return idUsuarioModificado;
-    }
-
-    public void setIdUsuarioModificado(Long idUsuarioModificado) {
-        this.idUsuarioModificado = idUsuarioModificado;
-    }
-
-    public LocalDateTime getFechaDeModificacion() {
-        return fechaDeModificacion;
-    }
-
-    public void setFechaDeModificacion(LocalDateTime fechaDeModificacion) {
-        this.fechaDeModificacion = fechaDeModificacion;
-    }
-
+    
     public Catalogo getEstatus() {
         return estatus;
     }

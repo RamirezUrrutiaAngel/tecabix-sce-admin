@@ -561,7 +561,7 @@ public class JPanelTurno extends javax.swing.JPanel {
         jComboBox1.setEnabled(false);
 
         jComboBoxBy.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-        jComboBoxBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "A. Paterno", "A. Materno", "CURP", "Puesto", "Plantel", "Clave" }));
+        jComboBoxBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Descripcion" }));
 
         jTextFieldSearch.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jTextFieldSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -598,7 +598,7 @@ public class JPanelTurno extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -734,7 +734,7 @@ public class JPanelTurno extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldSearchActionPerformed
 
     private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
-        JDialogTrabajadorNuevo jdtn = new JDialogTrabajadorNuevo(parent);
+        JDialogTurnoNuevo jdtn = new JDialogTurnoNuevo(parent);
         init();
     }//GEN-LAST:event_jButtonNuevoActionPerformed
 
@@ -747,7 +747,7 @@ public class JPanelTurno extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
-        JDialogTrabajadorNuevo jdtn = new JDialogTrabajadorNuevo(parent);
+        JDialogTurnoNuevo jdtn = new JDialogTurnoNuevo(parent);
         init();
     }//GEN-LAST:event_jMenuItemNuevoActionPerformed
 

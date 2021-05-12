@@ -23,11 +23,9 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -44,29 +42,20 @@ public class Turno implements Serializable {
 
     private static final long serialVersionUID = 2375902079042196833L;
 
+    public static final short SIZE_NOMBRE = 45;
+    public static final short SIZE_DESCRIPCION = 200;
+        
     @Id
     private Long id;
-    @Column(name = "nombre")
     private String nombre;
-    @Column(name = "descripcion")
     private String descripcion;
-    @ManyToOne
-    @JoinColumn(name = "id_tipo")
-    private Catalogo tipo;
-    @Column(name = "id_empresa")
-    @JsonProperty(access = Access.WRITE_ONLY)
-    private Long idEmpresa;
-    @Column(name = "id_usuario_modificado")
     @JsonProperty(access = Access.WRITE_ONLY)
     private Long idUsuarioModificado;
-    @Column(name = "fecha_modificado")
     @JsonProperty(access = Access.WRITE_ONLY)
     private LocalDateTime fechaDeModificacion;
     @ManyToOne
-    @JoinColumn(name = "id_estatus")
     @JsonProperty(access = Access.WRITE_ONLY)
     private Catalogo estatus;
-    @Column(name = "clave")
     private UUID clave;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "turno", cascade = CascadeType.REMOVE)
     private List<TurnoDia> TurnoDias;
@@ -93,22 +82,6 @@ public class Turno implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Catalogo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Catalogo tipo) {
-        this.tipo = tipo;
-    }
-
-    public Long getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(Long idEmpresa) {
-        this.idEmpresa = idEmpresa;
     }
 
     public Long getIdUsuarioModificado() {

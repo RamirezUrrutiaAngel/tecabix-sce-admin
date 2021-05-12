@@ -55,7 +55,7 @@ public class Catalogo implements Serializable {
     @JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne
     private CatalogoTipo catalogoTipo;
-    private String clave;
+    private UUID clave;
 
     public long getId() {
         return id;
@@ -106,11 +106,11 @@ public class Catalogo implements Serializable {
     }
 
     public UUID getClave() {
-        return UUID.fromString(clave);
+        return this.clave;
     }
 
     public void setClave(UUID clave) {
-        this.clave = clave.toString();
+        this.clave = clave;
     }
 
     @Override
