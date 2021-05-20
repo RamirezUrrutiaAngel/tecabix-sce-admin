@@ -27,11 +27,15 @@ import javax.swing.JProgressBar;
  */
 public abstract class Proceso extends javax.swing.JDialog{
 
+    private JFrame jFrame;
+    private java.awt.Frame frame;
+    private JDialog jDialog;
     public Proceso(JFrame parent) {
         super(parent, true);
         initComponents();
         this.setLocationRelativeTo(parent);
         init();
+        jFrame = parent;
     }
     
     public Proceso(java.awt.Frame parent) {
@@ -39,6 +43,7 @@ public abstract class Proceso extends javax.swing.JDialog{
         initComponents();
         this.setLocationRelativeTo(parent);
         init();
+        frame = parent;
     }
     
     public Proceso(JDialog parent) {
@@ -46,6 +51,7 @@ public abstract class Proceso extends javax.swing.JDialog{
         initComponents();
         this.setLocationRelativeTo(parent);
         init();
+        jDialog = parent;
     }
     
     private void init(){
@@ -55,7 +61,19 @@ public abstract class Proceso extends javax.swing.JDialog{
                 getjProgressBar().setValue(0);
                 proceso();
                 getjProgressBar().setValue(100);
+                
                 dispose();
+                setVisible(false);
+                repaint();
+                if(jFrame != null){
+                    jFrame.repaint();
+                }
+                if(frame != null){
+                    frame.repaint();
+                }
+                if(jDialog != null){
+                    jDialog.repaint();
+                }
             }
         };
         

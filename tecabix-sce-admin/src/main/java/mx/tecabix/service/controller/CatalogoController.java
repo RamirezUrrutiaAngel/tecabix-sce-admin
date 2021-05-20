@@ -29,17 +29,17 @@ import org.springframework.http.HttpMethod;
  */
 public class CatalogoController extends TecabixService<Catalogo,CatalogoTipo>{
     
-    private static final String URL_CAT_GRUP_FIND_NOM  ="cata/v1/CataGrupoFindByNombre";
+    private static final String URL_FIND_BY_TIPO_NOMBRE  ="catalogo/v1/findByTipoNombre";
     
-    private static final String NOMBRE ="nombre";
+    private static final String NOMBRE_TIPO_NOMBRE ="catalogoTipoNombre";
      
     public CatalogoController() {
         super(CatalogoTipo.class);
     }
-    public CatalogoTipo catalogoTipoFindByNombre(String nombre)throws Exception{
+    public CatalogoTipo findByTipoNombre(String nombre)throws Exception{
         HashMap<String,Object> arg = new HashMap<>();
-        arg.put(NOMBRE,nombre);
-        return getPeticion(HttpMethod.GET, URL_CAT_GRUP_FIND_NOM,arg);
+        arg.put(NOMBRE_TIPO_NOMBRE,nombre);
+        return getPeticion(HttpMethod.GET, URL_FIND_BY_TIPO_NOMBRE,arg);
     }
     
 }
