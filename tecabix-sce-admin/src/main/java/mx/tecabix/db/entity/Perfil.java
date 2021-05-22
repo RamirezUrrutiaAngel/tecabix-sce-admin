@@ -75,7 +75,7 @@ public class Perfil implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "id_authority")}
     )
-    private List<Authority> authorities;
+    private List<Autorizacion> autorizaciones;
 
     public Long getId() {
         return id;
@@ -141,11 +141,11 @@ public class Perfil implements Serializable {
         this.clave = clave;
     }
 
-    public List<Authority> getAuthorities() {
-        return authorities;
+    public List<Autorizacion> getAutorizaciones() {
+        return autorizaciones;
     }
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
+    public void setAutorizaciones(List<Autorizacion> authorities) {
+        this.autorizaciones = authorities;
     }
 }

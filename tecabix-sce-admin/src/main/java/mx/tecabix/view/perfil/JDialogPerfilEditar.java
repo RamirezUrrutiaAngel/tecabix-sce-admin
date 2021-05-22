@@ -29,7 +29,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import static javax.swing.SwingConstants.RIGHT;
 import javax.swing.table.DefaultTableCellRenderer;
-import mx.tecabix.db.entity.Authority;
+import mx.tecabix.db.entity.Autorizacion;
 import mx.tecabix.db.entity.Catalogo;
 import mx.tecabix.db.entity.Perfil;
 import mx.tecabix.service.Auth;
@@ -46,8 +46,8 @@ import mx.tecabix.view.Proceso;
  */
 public class JDialogPerfilEditar extends javax.swing.JDialog {
 
-    private List<Authority> authoritySinAsignar;
-    private List<Authority> authorityAsignados;
+    private List<Autorizacion> authoritySinAsignar;
+    private List<Autorizacion> authorityAsignados;
     private ModelT defaultTableModelA;
     private ModelT defaultTableModelB;
     private Perfil perfil;
@@ -67,27 +67,27 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
     private  void init(){
         try {
             AuthorityController authorityController = new AuthorityController();
-            Authority auth = authorityController.findAutentificados();
+            Autorizacion auth = authorityController.findAutentificados();
             authoritySinAsignar = new ArrayList<>();
-            if(this.perfil.getAuthorities() != null){
-                authorityAsignados = this.perfil.getAuthorities();
+            if(this.perfil.getAutorizaciones() != null){
+                authorityAsignados = this.perfil.getAutorizaciones();
             }else{
                 authorityAsignados = new ArrayList();
             }
             
             if(auth != null){
-                List<Authority> aux =  auth.getSubAuthority();
+                List<Autorizacion> aux =  auth.getSubAutorizacion();
                 if(aux != null){
-                    for (Authority item : aux) {
+                    for (Autorizacion item : aux) {
                         Catalogo estatus = item.getEstatus();
                         if(estatus == null)continue;
                         if(!estatus.getNombre().equalsIgnoreCase("ACTIVO"))continue;
                         if(!authorityAsignados.contains(item)){
                             authoritySinAsignar.add(item);
                         }
-                        List<Authority> sub = item.getSubAuthority();
+                        List<Autorizacion> sub = item.getSubAutorizacion();
                         if(sub != null){
-                            for (Authority subItem : sub) {
+                            for (Autorizacion subItem : sub) {
                                 estatus = subItem.getEstatus();
                                 if(estatus == null)continue;
                                 if(!estatus.getNombre().equalsIgnoreCase("ACTIVO"))continue;
@@ -123,7 +123,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
             headerType[0] = java.lang.String.class;
             defaultTableModelA = new ModelT(header,headerType);
             for (int i = 0; i < authoritySinAsignar.size(); i++) {
-                Authority auth = authoritySinAsignar.get(i);
+                Autorizacion auth = authoritySinAsignar.get(i);
                 defaultTableModelA.addRow(new java.util.Vector());
                 defaultTableModelA.setValueAt(auth.getDescripcion(),  i, 0);
             }
@@ -202,7 +202,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
             headerType[DESCRIPCION] = java.lang.String.class;
             defaultTableModelB = new ModelT(header,headerType);
             for (int i = 0; i < authorityAsignados.size(); i++) {
-                Authority auth = authorityAsignados.get(i);
+                Autorizacion auth = authorityAsignados.get(i);
                 defaultTableModelB.addRow(new java.util.Vector());
                 defaultTableModelB.setValueAt(auth.getDescripcion(),  i, 0);
             }
@@ -535,10 +535,10 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldNombreKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        for (Authority authority : authoritySinAsignar) {
+        for (Autorizacion authority : authoritySinAsignar) {
             authorityAsignados.add(authority);
         }
-        for (Authority authority : authorityAsignados) {
+        for (Autorizacion authority : authorityAsignados) {
             authoritySinAsignar.remove(authority);
         }
         counstrurTablas();
@@ -547,7 +547,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int selected = jTableA.getSelectedRow();
         if(selected >= 0 && selected < this.authoritySinAsignar.size()){
-            Authority authority = this.authoritySinAsignar.get(selected);
+            Autorizacion authority = this.authoritySinAsignar.get(selected);
             authoritySinAsignar.remove(authority);
             authorityAsignados.add(authority);
             counstrurTablas();
@@ -559,7 +559,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selected = jTableB.getSelectedRow();
         if(selected >= 0 && selected < this.authorityAsignados.size()){
-            Authority authority = this.authorityAsignados.get(selected);
+            Autorizacion authority = this.authorityAsignados.get(selected);
             authorityAsignados.remove(authority);
             authoritySinAsignar.add(authority);
             counstrurTablas();
@@ -569,10 +569,10 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        for (Authority authority : authorityAsignados) {
+        for (Autorizacion authority : authorityAsignados) {
             authoritySinAsignar.add(authority);
         }
-        for (Authority authority : authoritySinAsignar) {
+        for (Autorizacion authority : authoritySinAsignar) {
             authorityAsignados.remove(authority);
         }
         counstrurTablas();
@@ -601,7 +601,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
                         PerfilController perfilController = new PerfilController();
                         perfil.setNombre(nombre);
                         perfil.setDescripcion(descripcion);
-                        perfil.setAuthorities(authorityAsignados);
+                        perfil.setAutorizaciones(authorityAsignados);
                         perfilController.update(perfil);
                         counstrurTablas();
                         THIS.dispose();

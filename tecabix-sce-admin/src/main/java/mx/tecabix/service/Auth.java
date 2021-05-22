@@ -20,7 +20,7 @@ package mx.tecabix.service;
 import java.util.List;
 import java.util.regex.Pattern;
 import mx.tecabix.ConfiguracionConexion;
-import mx.tecabix.db.entity.Authority;
+import mx.tecabix.db.entity.Autorizacion;
 import mx.tecabix.db.entity.Catalogo;
 import mx.tecabix.db.entity.Perfil;
 
@@ -48,11 +48,11 @@ public class Auth {
         if (perfil == null) {
             return false;
         }
-        List<Authority> authoritys = perfil.getAuthorities();
+        List<Autorizacion> authoritys = perfil.getAutorizaciones();
         if (authoritys == null) {
             return false;
         }
-        for (Authority item : authoritys) {
+        for (Autorizacion item : authoritys) {
             if (item.getNombre() == null) {
                 continue;
             }

@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
  *
  */
 @Entity()
-public class Authority implements Serializable {
+public class Autorizacion implements Serializable {
 
     private static final long serialVersionUID = 4643106103106362573L;
 
@@ -56,7 +56,7 @@ public class Authority implements Serializable {
     @JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_pre_authority")
-    private Authority preAuthority;
+    private Autorizacion preAutorizacion;
     @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name = "id_usuario_modificado")
     private Long idUsuarioModificado;
@@ -69,9 +69,9 @@ public class Authority implements Serializable {
     @Column(name = "clave")
     private UUID clave;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "preAuthority", cascade = CascadeType.REMOVE)
-    private List<Authority> subAuthority;
+    private List<Autorizacion> subAutorizacion;
     @JsonProperty(access = Access.WRITE_ONLY)
-    @ManyToMany(mappedBy = "authorities", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "autorizaciones", cascade = CascadeType.REMOVE)
     private List<Perfil> perfiles;
 
     public Integer getId() {
@@ -98,12 +98,12 @@ public class Authority implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Authority getPreAuthority() {
-        return preAuthority;
+    public Autorizacion getPreAutorizacion() {
+        return preAutorizacion;
     }
 
-    public void setPreAuthority(Authority preAuthority) {
-        this.preAuthority = preAuthority;
+    public void setPreAutorizacion(Autorizacion preAuthority) {
+        this.preAutorizacion = preAuthority;
     }
 
     public Long getIdUsuarioModificado() {
@@ -130,12 +130,12 @@ public class Authority implements Serializable {
         this.estatus = estatus;
     }
 
-    public List<Authority> getSubAuthority() {
-        return subAuthority;
+    public List<Autorizacion> getSubAutorizacion() {
+        return subAutorizacion;
     }
 
-    public void setSubAuthority(List<Authority> subAuthority) {
-        this.subAuthority = subAuthority;
+    public void setSubAutorizacion(List<Autorizacion> subAuthority) {
+        this.subAutorizacion = subAuthority;
     }
 
     public List<Perfil> getPerfiles() {
@@ -173,7 +173,7 @@ public class Authority implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Authority other = (Authority) obj;
+        Autorizacion other = (Autorizacion) obj;
         if (this.id != null && other.id != null) {
             if (this.id.equals(other.id)) {
                 if (this.clave != null && other.clave != null) {

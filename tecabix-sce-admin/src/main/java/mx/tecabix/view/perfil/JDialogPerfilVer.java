@@ -27,7 +27,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import static javax.swing.SwingConstants.RIGHT;
 import javax.swing.table.DefaultTableCellRenderer;
-import mx.tecabix.db.entity.Authority;
+import mx.tecabix.db.entity.Autorizacion;
 import mx.tecabix.db.entity.Perfil;
 import mx.tecabix.view.ErrorLog;
 import mx.tecabix.view.ModelT;
@@ -40,7 +40,7 @@ public class JDialogPerfilVer extends javax.swing.JDialog {
 
     private JFrame parent;
     private ModelT defaultTableModel;
-    private List<Authority> authoritys;
+    private List<Autorizacion> authoritys;
     
     private final short NOMBRE = 0;
     private final short DESCRIPCION = 1;
@@ -55,7 +55,7 @@ public class JDialogPerfilVer extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
         jTextFieldNombre.setText(perfil.getNombre());
         jTextFieldDescripcion.setText(perfil.getDescripcion());
-        authoritys = perfil.getAuthorities();
+        authoritys = perfil.getAutorizaciones();
         counstrurTabla();
         setVisible(true);
     }
@@ -80,7 +80,7 @@ public class JDialogPerfilVer extends javax.swing.JDialog {
                 authoritys = new ArrayList<>();
             }
             for (int i = 0; i < authoritys.size(); i++) {
-                Authority authority = authoritys.get(i);
+                Autorizacion authority = authoritys.get(i);
                 defaultTableModel.addRow(new java.util.Vector());
                 defaultTableModel.setValueAt(authority.getNombre(),  i, 0);
                 defaultTableModel.setValueAt(authority.getDescripcion(),  i, 1);

@@ -40,7 +40,7 @@ public class PerfilAuthority implements Serializable {
     private Perfil perfil;
     @ManyToOne
     @JoinColumn(name = "id_authority")
-    private Authority authority;
+    private Autorizacion authority;
 
     public Long getId() {
         return id;
@@ -58,11 +58,11 @@ public class PerfilAuthority implements Serializable {
         this.perfil = perfil;
     }
 
-    public Authority getAuthority() {
+    public Autorizacion getAuthority() {
         return authority;
     }
 
-    public void setAuthority(Authority authority) {
+    public void setAuthority(Autorizacion authority) {
         this.authority = authority;
     }
 }

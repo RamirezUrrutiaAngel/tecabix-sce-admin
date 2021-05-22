@@ -17,7 +17,7 @@
  */
 package mx.tecabix.service.controller;
 
-import mx.tecabix.db.entity.Authority;
+import mx.tecabix.db.entity.Autorizacion;
 import mx.tecabix.service.TecabixService;
 import org.springframework.http.HttpMethod;
 
@@ -26,16 +26,16 @@ import org.springframework.http.HttpMethod;
  * @author Ramirez Urrutia Angel Abinadi
  *
  */
-public class AuthorityController extends TecabixService<Authority,Authority>{
+public class AuthorityController extends TecabixService<Autorizacion,Autorizacion>{
     
     private static final String URL_FIND_AUTENTIFICADOS ="authority/v1/findAutentificados";
     
     
     public AuthorityController() {
-        super(Authority.class);
+        super(Autorizacion.class);
     }
     
-    public Authority findAutentificados()throws Exception{
+    public Autorizacion findAutentificados()throws Exception{
         return getPeticion(HttpMethod.GET, URL_FIND_AUTENTIFICADOS);
     }
     
