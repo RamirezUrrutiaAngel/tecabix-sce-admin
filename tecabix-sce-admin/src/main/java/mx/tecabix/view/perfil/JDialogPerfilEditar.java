@@ -33,7 +33,7 @@ import mx.tecabix.db.entity.Autorizacion;
 import mx.tecabix.db.entity.Catalogo;
 import mx.tecabix.db.entity.Perfil;
 import mx.tecabix.service.Auth;
-import mx.tecabix.service.controller.AuthorityController;
+import mx.tecabix.service.controller.AutorizacionController;
 import mx.tecabix.service.controller.PerfilController;
 import mx.tecabix.view.ErrorLog;
 import mx.tecabix.view.ModelT;
@@ -66,7 +66,7 @@ public class JDialogPerfilEditar extends javax.swing.JDialog {
     
     private  void init(){
         try {
-            AuthorityController authorityController = new AuthorityController();
+            AutorizacionController authorityController = new AutorizacionController();
             Autorizacion auth = authorityController.findAutentificados();
             authoritySinAsignar = new ArrayList<>();
             if(this.perfil.getAutorizaciones() != null){

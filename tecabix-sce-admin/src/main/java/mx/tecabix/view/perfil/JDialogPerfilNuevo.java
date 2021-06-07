@@ -33,7 +33,7 @@ import mx.tecabix.db.entity.Autorizacion;
 import mx.tecabix.db.entity.Catalogo;
 import mx.tecabix.db.entity.Perfil;
 import mx.tecabix.service.Auth;
-import mx.tecabix.service.controller.AuthorityController;
+import mx.tecabix.service.controller.AutorizacionController;
 import mx.tecabix.service.controller.PerfilController;
 import mx.tecabix.view.ErrorLog;
 import mx.tecabix.view.ModelT;
@@ -51,9 +51,11 @@ public class JDialogPerfilNuevo extends javax.swing.JDialog {
     private ModelT defaultTableModelA;
     private ModelT defaultTableModelB;
     private Auth auth = new Auth();
+    java.awt.Frame parent;
     public JDialogPerfilNuevo(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
+        this.parent = parent;
         setLocationRelativeTo(parent);
         init();
         setVisible(true);
@@ -61,7 +63,7 @@ public class JDialogPerfilNuevo extends javax.swing.JDialog {
     
     private  void init(){
         try {
-            AuthorityController authorityController = new AuthorityController();
+            AutorizacionController authorityController = new AutorizacionController();
             Autorizacion auth = authorityController.findAutentificados();
             authoritySinAsignar = new ArrayList<>();
             authorityAsignados = new ArrayList();
@@ -89,7 +91,7 @@ public class JDialogPerfilNuevo extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(JDialogPerfilNuevo.class.getName()).log(Level.SEVERE, null, ex);
             dispose();
-            ErrorLog error = new ErrorLog(this, ex);
+            ErrorLog error = new ErrorLog(parent, ex);
         }
         
     }

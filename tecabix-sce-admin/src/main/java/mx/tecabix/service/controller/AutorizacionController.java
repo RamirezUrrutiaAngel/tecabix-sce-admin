@@ -26,12 +26,12 @@ import org.springframework.http.HttpMethod;
  * @author Ramirez Urrutia Angel Abinadi
  *
  */
-public class AuthorityController extends TecabixService<Autorizacion,Autorizacion>{
+public class AutorizacionController extends TecabixService<Autorizacion,Autorizacion>{
     
-    private static final String URL_FIND_AUTENTIFICADOS ="authority/v1/findAutentificados";
+    private static final String URL_FIND_AUTENTIFICADOS ="autorizacion/v1/findAutentificados";
     
     
-    public AuthorityController() {
+    public AutorizacionController() {
         super(Autorizacion.class);
     }
     
