@@ -37,8 +37,8 @@ public class Departamento implements Serializable {
 
     private static final long serialVersionUID = 7103884461465274188L;
 
-    public static final short SIZE_NOMBRE = 35;
-    public static final short SIZE_DESCRIPCION = 300;
+    public static final short SIZE_NOMBRE = 30;
+    public static final short SIZE_DESCRIPCION = 250;
 
     @Id
     private Long id;
